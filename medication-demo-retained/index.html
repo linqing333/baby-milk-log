@@ -1,0 +1,2478 @@
+<!doctype html>
+<html lang="zh-CN" data-visualize-standalone>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src 'unsafe-inline' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>点滴 · 用药记录（标签保留方案）</title>
+<style>:root{color-scheme:light dark;background:light-dark(rgb(255 255 255), rgb(24 24 24))}html,body{margin:0}body{box-sizing:border-box;padding:1rem;background:inherit}iframe{display:block;width:100%;height:calc(100vh - 2rem);margin:0 auto;border:0}</style>
+</head>
+<body>
+<iframe id="codex-visualization" sandbox="allow-scripts" referrerpolicy="no-referrer" title="点滴 · 用药记录（标签保留方案）" data-srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;zh-CN&quot; data-visualize-standalone&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+&lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;default-src &#x27;none&#x27;; script-src &#x27;unsafe-inline&#x27; &#x27;unsafe-eval&#x27; &#x27;wasm-unsafe-eval&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src &#x27;unsafe-inline&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src &#x27;none&#x27;; object-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;&quot;&gt;
+&lt;title&gt;点滴 · 用药记录（标签保留方案）&lt;/title&gt;
+&lt;style&gt;:root {
+  color-scheme: light dark;
+  background-color: var(
+    --background,
+    var(--color-background-primary, light-dark(rgb(255 255 255), rgb(24 24 24)))
+  ) !important;
+
+  /* Agent-facing contract; keep in sync with SKILL.md. */
+  --background: var(
+    --color-background-primary,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --card: color-mix(in oklab, var(--foreground) 5%, var(--background));
+  --card-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --popover: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255), rgb(45 45 45))
+  );
+  --popover-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --primary: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --primary-foreground: var(
+    --color-text-inverse,
+    light-dark(rgb(255 255 255), rgb(13 13 13))
+  );
+  --secondary: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255 / 96%), rgb(54 54 54 / 96%))
+  );
+  --secondary-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --muted: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --muted-foreground: var(
+    --color-text-secondary,
+    light-dark(rgb(26 28 31 / 49.4%), rgb(255 255 255 / 49.8%))
+  );
+  --accent: var(
+    --color-background-info,
+    light-dark(rgb(229 242 255), rgb(13 39 63))
+  );
+  --accent-foreground: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --destructive: var(
+    --color-text-warning,
+    light-dark(rgb(226 85 7), rgb(255 133 73))
+  );
+  --border: var(
+    --color-border-secondary,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+  --input: var(
+    --color-border-primary,
+    light-dark(
+      rgb(26 28 31 / 11.8%),
+      color-mix(in oklab, rgb(0 0 0) 10%, transparent)
+    )
+  );
+  --ring: var(
+    --color-ring-primary,
+    light-dark(rgb(51 156 255), rgb(131 195 255 / 76%))
+  );
+  --font-size-base: var(--font-text-md-size, 14px);
+  --blue: light-dark(rgb(51 156 255), rgb(51 156 255));
+  --orange: light-dark(rgb(226 85 7), rgb(251 106 34));
+  --green: light-dark(rgb(0 162 64), rgb(64 201 119));
+  --red: light-dark(rgb(224 46 42), rgb(255 103 100));
+  --purple: light-dark(rgb(146 79 247), rgb(173 123 249));
+  --yellow: light-dark(rgb(255 195 0), rgb(255 210 64));
+  --viz-series-1: var(--primary);
+  --viz-series-2: light-dark(rgb(243 136 59), rgb(245 154 86));
+  --viz-series-3: light-dark(rgb(93 201 119), rgb(116 213 139));
+  --viz-series-4: light-dark(rgb(235 119 177), rgb(240 143 192));
+  --viz-series-5: light-dark(rgb(155 121 236), rgb(170 145 239));
+  --viz-series-6: light-dark(rgb(58 185 177), rgb(90 203 194));
+
+  /* Internal implementation variables; not part of the agent contract. */
+  --font-sans: -apple-system, system-ui, &quot;Segoe UI&quot;, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, &quot;SF Mono&quot;, Menlo, Consolas, &quot;Liberation Mono&quot;,
+    monospace;
+  --font-size-normal: max(11px, var(--font-size-base));
+  --font-size-tooltip: calc(var(--font-size-base) - 1px);
+  --font-size-small: max(11px, calc(var(--font-size-base) - 2px));
+  --font-size-h1: calc(var(--font-size-normal) * 1.7142857143);
+  --font-size-h2: calc(var(--font-size-normal) * 1.4285714286);
+  --font-size-h3: calc(var(--font-size-normal) * 1.2857142857);
+  --font-weight-normal: 430;
+  --font-weight-medium: 500;
+  --icon-size: 16px;
+  --line-height-normal: calc(var(--font-size-normal) * 1.5);
+  --line-height-tooltip: calc(var(--font-size-tooltip) * 1.4285714286);
+  --line-height-small: calc(var(--font-size-small) + 4px);
+  --corner-shape: round;
+  --radius: var(--border-radius-lg, 10px);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-2xl: calc(var(--radius) * 1.6);
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px -1px rgb(0 0 0 / 8%);
+  --checkmark-image: url(&quot;data:image/svg+xml,%3Csvg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; viewBox=&#x27;0 0 17 17&#x27;%3E%3Cpath d=&#x27;M12.8961 3.64101C13.1297 3.41418 13.4984 3.37523 13.7779 3.56581C14.0571 3.75635 14.1554 4.11331 14.0299 4.41347L13.9615 4.53847L7.71151 13.7045C7.59411 13.8767 7.4063 13.9877 7.19881 14.0072C6.99136 14.0267 6.78564 13.9533 6.63826 13.806L2.88826 10.056L2.79842 9.9457C2.6192 9.67407 2.64927 9.30496 2.88826 9.06581C3.12738 8.82669 3.49647 8.79676 3.76815 8.97597L3.8785 9.06581L7.03084 12.2182L12.8053 3.74941L12.8961 3.64101Z&#x27;/%3E%3C/svg%3E&quot;);
+
+  /* Legacy aliases; not part of the current agent contract. */
+  --viz-bg: transparent;
+  --viz-panel: var(--card);
+  --viz-border: var(--border);
+  --viz-text: var(--foreground);
+  --viz-muted: var(--muted-foreground);
+  --viz-accent: var(--primary);
+  --viz-accent-text: var(--primary-foreground);
+  --viz-accent-bg: var(--accent);
+  --viz-font-size: var(--font-size-base);
+  --viz-warning: var(--destructive);
+}
+
+:root[data-theme=&quot;light&quot;] {
+  color-scheme: light;
+}
+
+:root[data-theme=&quot;dark&quot;] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html &gt; body {
+  /* Preserve MCP aliases for older inline renderers without creating :root cycles. */
+  --color-background-primary: var(
+    --background,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --color-text-primary: var(
+    --foreground,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --color-border-secondary: var(
+    --border,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+
+  margin: 0;
+  padding: var(--visualize-paint-gutter, 0px);
+  color: var(--foreground);
+  background: transparent !important;
+  font-family: var(--font-sans) !important;
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+}
+
+:root:not([data-app-block-surface], [data-visualize-standalone]) &gt; body {
+  padding: 12px;
+}
+
+.cursor-interaction {
+  cursor: var(--cursor-interaction, pointer);
+}
+
+a {
+  color: color-mix(in srgb, var(--viz-accent) 80%, var(--viz-text) 20%);
+  cursor: var(--cursor-interaction, pointer);
+  font-weight: var(--font-weight-medium, 500);
+  text-decoration: none;
+  text-underline-offset: 2px;
+}
+
+a:is(:hover, :focus-visible) {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.3;
+}
+
+b,
+strong,
+th {
+  font-weight: var(--font-weight-medium);
+}
+
+code:not(pre code) {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  corner-shape: var(--corner-shape);
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  word-break: break-word;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--foreground);
+  font: inherit;
+  text-align: start;
+}
+
+.table :is(th, td) {
+  padding-block: 10px;
+  padding-inline: 0 24px;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--border);
+  text-align: start;
+  vertical-align: top;
+}
+
+.table-responsive &gt; .table :is(th, td) {
+  overflow-wrap: break-word;
+}
+
+.table :is(th, td):last-child {
+  padding-inline-end: 0;
+}
+
+.table :is(caption, thead th) {
+  font-weight: 600;
+}
+
+.table thead th {
+  padding-block: 8px;
+  border-bottom-color: color-mix(in srgb, var(--foreground) 16%, transparent);
+}
+
+.table tbody tr:last-child :is(th, td) {
+  border-bottom: 0;
+}
+
+.table.table-sm :is(th, td) {
+  padding-block: 6px;
+}
+
+.table.table-sm :is(th, td):not(:last-child) {
+  padding-inline-end: 16px;
+}
+
+.table :is(.text-end, [align=&quot;right&quot;]) {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.table :is(.text-center, [align=&quot;center&quot;]) {
+  text-align: center;
+}
+
+.table .text-nowrap {
+  white-space: nowrap;
+}
+
+#widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  background: transparent !important;
+}
+
+.card {
+  min-width: 0;
+  padding: 12px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border-radius: var(--radius-2xl);
+  corner-shape: var(--corner-shape);
+  color: var(--card-foreground);
+  background: var(--card);
+}
+
+.widget {
+  min-width: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  box-shadow: 0 0 0 0.5px var(--border-strong, var(--border));
+  color: var(--foreground);
+  background: var(--background);
+}
+
+#widget &gt; :not(.card, .widget, .progress) {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: max-content;
+  max-width: min(
+    20rem,
+    var(--tooltip-available-width, calc(100vw - 10px)),
+    calc(100vw - 10px)
+  );
+  max-height: min(
+    var(--tooltip-available-height, calc(100vh - 10px)),
+    calc(100vh - 10px)
+  );
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--popover-foreground);
+  background: var(--popover);
+  box-shadow: none;
+  font-size: var(--font-size-tooltip);
+  line-height: var(--line-height-tooltip);
+  overflow-wrap: break-word;
+  white-space: normal;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* The shared runtime owns data-tooltip; suppress AppBlock&#x27;s pseudo-tooltip. */
+main [data-tooltip]::after {
+  content: none;
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(180px, 24%), 1fr));
+  gap: 10px;
+}
+
+.viz-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.viz-stat-value {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+.viz-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+hr {
+  width: 100%;
+  height: 1px;
+  margin-block: 6px;
+  border: 0;
+  background: var(--border);
+}
+
+.nav {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 4px;
+}
+
+.progress {
+  display: flex;
+  height: 8px;
+  margin-block: calc((var(--line-height-normal, 1.5em) - 8px) / 2);
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+}
+
+.progress-bar:only-child {
+  border-radius: var(--radius-full);
+}
+
+.progress-bar {
+  height: 100%;
+  flex-shrink: 0;
+  border: 0;
+  background: var(--viz-series-1);
+}
+
+.viz-badge {
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  color: var(--accent-foreground);
+  background: var(--accent);
+  font-weight: var(--font-weight-medium);
+}
+
+small,
+.text-small,
+.viz-badge {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.viz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.viz-controls &gt; .form-label {
+  display: grid;
+  min-width: min(100%, 260px);
+  flex: 1 1 280px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 0;
+}
+
+.viz-controls &gt; .form-label &gt; :is(.form-control, .form-range, .form-select) {
+  grid-column: 1 / -1;
+}
+
+.btn,
+.nav-link,
+.form-check-input,
+.form-control,
+.form-range,
+.form-select {
+  font: inherit;
+}
+
+.btn,
+.nav-link {
+  appearance: button;
+  display: inline-flex;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 8px;
+  -webkit-app-region: no-drag;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: var(--cursor-interaction, pointer);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.btn:is(.btn-block, .viz-tile) {
+  inline-size: 100%;
+}
+
+.btn.viz-tile {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+a.btn {
+  cursor: var(--cursor-interaction, pointer);
+  text-decoration: none;
+}
+
+.btn:not(:disabled):hover,
+.nav-link:not(:disabled):not([aria-disabled=&quot;true&quot;]):hover {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn-primary {
+  border-color: transparent;
+  color: var(--primary-foreground);
+  background: var(--foreground);
+  background-clip: padding-box;
+}
+
+.btn-primary .text-muted {
+  color: color-mix(in srgb, var(--primary-foreground) 50%, transparent);
+}
+
+.btn-primary:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 80%, transparent);
+  background-clip: padding-box;
+}
+
+.btn-ghost {
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.btn-ghost:not(:disabled):hover {
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.nav-pills .nav-link {
+  min-width: 0;
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.nav-justified .nav-link {
+  flex: 1 1 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.nav-pills .nav-link.active {
+  color: var(--foreground);
+  background: var(--muted);
+}
+
+/* Shared preview chrome; product styles stay inside each variant. */
+.viz-dotted-background {
+  background-image: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--foreground) 14%, transparent) 0.8px,
+    transparent 0.8px
+  );
+  background-position: center;
+  background-size: 16px 16px;
+}
+
+.viz-carousel {
+  position: relative;
+  min-width: 0;
+}
+
+.viz-carousel:has(&gt; .viz-carousel-controls) {
+  min-height: calc(60px + var(--viz-carousel-picker-height, 0px));
+  padding-bottom: 60px;
+}
+
+.viz-carousel &gt; [data-variant][hidden] {
+  display: none !important;
+}
+
+.viz-carousel &gt; [data-variant] {
+  isolation: isolate;
+}
+
+.viz-carousel-controls {
+  --viz-carousel-hover: light-dark(
+    color-mix(in srgb, var(--foreground) 5.4%, transparent),
+    color-mix(in srgb, var(--foreground) 7.8%, transparent)
+  );
+  position: absolute;
+  z-index: 2;
+  bottom: 8px;
+  left: 50%;
+  display: flex;
+  width: max-content;
+  /* Leave room for the host&#x27;s design-controls launcher at the trailing edge. */
+  max-width: calc(100% - 96px);
+  align-items: center;
+  gap: 0;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-sans);
+  /* Match the settings dropdown chrome independently of the content font size. */
+  font-size: 13px;
+  font-weight: var(--font-weight-normal);
+  line-height: 18px;
+  transform: translateX(-50%);
+  user-select: none;
+}
+
+/* Keep authored mockup button styles out of the shared carousel chrome. */
+.viz-carousel-controls button,
+.viz-carousel-picker &gt; summary {
+  display: flex !important;
+  height: auto !important;
+  min-height: 30px;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px;
+  padding: 0 6px !important;
+  -webkit-app-region: no-drag;
+  border: 0 !important;
+  border-radius: 14px !important;
+  color: inherit !important;
+  background: transparent !important;
+  font: inherit !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.viz-carousel-controls &gt; button,
+.viz-carousel-picker &gt; summary {
+  position: relative;
+  isolation: isolate;
+}
+
+.viz-carousel-controls &gt; button {
+  --icon-size: 16px;
+  width: 30px !important;
+  padding: 0 !important;
+}
+
+.viz-carousel-picker &gt; summary {
+  padding-inline: 12px !important;
+}
+
+.viz-carousel-controls .viz-carousel-caret {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  margin: 0;
+  color: inherit;
+  transform: rotate(180deg);
+}
+
+.viz-carousel-controls &gt; button &gt; svg,
+.viz-carousel-controls .viz-carousel-caret,
+.viz-carousel-count {
+  opacity: 0.5;
+}
+
+.viz-carousel-controls &gt; button::before,
+.viz-carousel-picker &gt; summary::before {
+  position: absolute;
+  z-index: -1;
+  inset: 3px;
+  border-radius: 12px;
+  content: &quot;&quot;;
+  pointer-events: none;
+}
+
+.viz-carousel-controls &gt; button:hover::before,
+.viz-carousel-picker &gt; summary:hover::before {
+  background: var(--viz-carousel-hover);
+}
+
+.viz-carousel-controls &gt; button,
+.viz-carousel-controls [data-lucide],
+.viz-carousel-controls .lucide {
+  flex-shrink: 0;
+}
+
+.viz-carousel-picker {
+  min-width: 0;
+}
+
+.viz-carousel-picker &gt; summary {
+  min-width: 0;
+  list-style: none;
+}
+
+.viz-carousel-picker &gt; summary::-webkit-details-marker {
+  display: none;
+}
+
+.viz-carousel-count {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.viz-carousel-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.viz-carousel-options {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 4px);
+  left: 0;
+  display: flex;
+  max-height: 240px;
+  flex-direction: column;
+  gap: 2px;
+  overflow: auto;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--background);
+  box-shadow: 0 4px 12px light-dark(rgb(0 0 0 / 6%), rgb(0 0 0 / 25%));
+}
+
+.viz-carousel-options &gt; button {
+  border-radius: max(0px, calc(var(--radius-lg) - 5px)) !important;
+  width: 100% !important;
+  min-height: 28px;
+  justify-content: flex-start !important;
+  padding: 4px 8px !important;
+  font-size: var(--font-size-small) !important;
+  text-align: start;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.viz-carousel-options &gt; [aria-current=&quot;true&quot;],
+.viz-carousel-options &gt; button:hover {
+  background: var(--viz-carousel-hover) !important;
+}
+
+.btn:disabled,
+.nav-link:disabled,
+.nav-link[aria-disabled=&quot;true&quot;] {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+[data-lucide] {
+  stroke-width: 1.6;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--foreground);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  padding: 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--foreground);
+  background: var(--secondary);
+}
+
+.form-control::placeholder {
+  color: var(--muted-foreground);
+}
+
+.form-control[type=&quot;file&quot;] {
+  padding: 0;
+  overflow: hidden;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control[type=&quot;file&quot;]::file-selector-button {
+  min-height: 26px;
+  margin-right: 8px;
+  padding: 0 8px;
+  border: 0;
+  border-right: 1px solid var(--input);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: inherit;
+  font: inherit;
+}
+
+.form-control[type=&quot;file&quot;]:not(:disabled):hover::file-selector-button {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-control-color[type=&quot;color&quot;] {
+  width: 40px;
+  height: 28px;
+  padding: 3px;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch {
+  border: 0;
+  border-radius: calc(var(--radius-lg) - 4px);
+  corner-shape: var(--corner-shape);
+}
+
+textarea.form-control {
+  height: auto;
+  min-height: 72px;
+  padding: 8px 10px;
+  resize: vertical;
+}
+
+.form-control:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-control:disabled,
+.form-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.form-select {
+  appearance: none;
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  margin: 0;
+  padding: 0 32px 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--foreground);
+  background-color: var(--secondary);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted-foreground) 50%),
+    linear-gradient(135deg, var(--muted-foreground) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) 50%,
+    calc(100% - 10px) 50%;
+  background-repeat: no-repeat;
+  background-size: 4px 4px;
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-select:not(:disabled):hover {
+  background-color: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-select:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-check {
+  display: flex;
+  min-height: 20px;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-check-input {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--input);
+  color: var(--primary-foreground);
+  background-color: transparent;
+  cursor: var(--cursor-interaction, default);
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    box-shadow 150ms;
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;] {
+  border-color: var(--input);
+  border-radius: var(--radius-sm);
+  corner-shape: var(--corner-shape);
+  background-color: var(--secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input:not(:disabled):not(:checked):hover {
+  background-color: var(--card);
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;]:checked {
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type=&quot;checkbox&quot;]:checked::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-foreground);
+  content: &quot;&quot;;
+  mask: var(--checkmark-image) center / 12px 12px no-repeat;
+}
+
+.form-check-input[type=&quot;radio&quot;] {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+}
+
+.form-check-input[type=&quot;radio&quot;]:checked {
+  border: 2px solid var(--primary);
+  background:
+    radial-gradient(circle, var(--primary-foreground) 0 2.5px, transparent 3px),
+    var(--primary);
+}
+
+.form-check:not(.form-switch) .form-check-input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+}
+
+.form-switch .form-check-input:disabled,
+.form-switch .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-check-label {
+  color: var(--foreground);
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-switch .form-check-input {
+  position: relative;
+  width: 32px;
+  height: 20px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+  box-shadow: none;
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid light-dark(var(--primary-foreground), var(--foreground));
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+  box-shadow: var(--shadow-sm);
+  content: &quot;&quot;;
+  transform: translate(2px, -50%);
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input:checked {
+  background: var(--primary);
+}
+
+.form-switch .form-check-input:checked::before {
+  transform: translate(14px, -50%);
+}
+
+.form-switch .form-check-input:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.form-range {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 28px;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: 0;
+  accent-color: var(--primary);
+  background: linear-gradient(
+      color-mix(in srgb, var(--foreground) 7%, transparent),
+      color-mix(in srgb, var(--foreground) 7%, transparent)
+    )
+    center / 100% 2px no-repeat;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-webkit-slider-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range::-moz-range-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-moz-range-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.btn:not(.btn-primary, .viz-tile):is(
+  [aria-pressed=&quot;true&quot;],
+  [aria-selected=&quot;true&quot;],
+  .is-selected
+) {
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+  background: var(--primary);
+}
+
+.btn.viz-tile:is([aria-pressed=&quot;true&quot;], [aria-selected=&quot;true&quot;], .is-selected) {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.btn:focus-visible,
+.nav-link:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.viz-carousel-controls :is(button, summary):focus-visible {
+  outline: 2px solid var(--ring) !important;
+  outline-offset: 2px !important;
+}
+
+@media (pointer: coarse) {
+  .viz-carousel:has(&gt; .viz-carousel-controls) {
+    min-height: calc(76px + var(--viz-carousel-picker-height, 0px));
+    padding-bottom: 76px;
+  }
+
+  .btn,
+  .nav-link,
+  .viz-carousel-controls button,
+  .viz-carousel-picker &gt; summary,
+  .form-control,
+  .form-select {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Keep small-screen WebKit from zooming when a text field receives focus. */
+  .form-control,
+  .form-select {
+    font-size: max(16px, var(--font-size-normal));
+  }
+
+  .form-control[type=&quot;file&quot;]::file-selector-button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .form-control-color[type=&quot;color&quot;] {
+    width: 44px;
+    height: 44px;
+  }
+
+  .form-control:is(
+    [type=&quot;date&quot;],
+    [type=&quot;datetime-local&quot;],
+    [type=&quot;month&quot;],
+    [type=&quot;time&quot;],
+    [type=&quot;week&quot;]
+  ) {
+    min-width: 0;
+    max-width: 100%;
+    padding-block: 8px;
+  }
+
+  .form-check {
+    min-height: 44px;
+    padding-inline: 15px;
+  }
+
+  .form-check-input {
+    position: relative;
+  }
+
+  .form-check-input::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 44px;
+    height: 44px;
+    content: &quot;&quot;;
+    transform: translate(-50%, -50%);
+  }
+
+  .form-check-label {
+    display: inline-flex;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+  }
+
+  .form-range {
+    height: 44px;
+    touch-action: pan-y;
+  }
+
+  .form-range::-webkit-slider-runnable-track {
+    height: 44px;
+  }
+
+  .form-range::-moz-range-track {
+    height: 44px;
+  }
+
+  .form-range::-webkit-slider-thumb {
+    margin-top: 12px;
+  }
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#widget &gt; svg {
+  width: 100%;
+}
+
+/* Model-authored chart rules can otherwise stretch icons after these styles load. */
+svg.lucide {
+  display: block;
+  width: var(--icon-size) !important;
+  height: var(--icon-size) !important;
+  flex: none;
+  margin: 0 !important;
+  stroke-width: 1.6;
+}
+
+.text-warning,
+.text-destructive {
+  color: var(--destructive);
+}
+
+html&gt;body{padding:0}&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;script type=&quot;application/json&quot; id=&quot;codex-visualization-widget-state&quot;&gt;__CODEX_VISUALIZATION_WIDGET_STATE__&lt;/script&gt;
+&lt;script&gt;(() =&gt; {
+  const root = document.documentElement;
+  const mediaQuery = globalThis.matchMedia(&quot;(prefers-color-scheme: dark)&quot;);
+  const apply = Reflect.apply;
+  const isArray = Array.isArray;
+  const hasOwn = Object.hasOwn;
+  const parentWindow = globalThis.parent;
+  const stringify = JSON.stringify;
+  const parse = JSON.parse;
+  const encode = TextEncoder.prototype.encode.bind(new TextEncoder());
+  const initialStateElement = document.getElementById(
+    &quot;codex-visualization-widget-state&quot;,
+  );
+  const initialGlobals = parse(initialStateElement?.textContent ?? &quot;{}&quot;);
+  initialStateElement?.remove();
+  /** @type {Record&lt;string, unknown&gt; | null} */
+  let state = initialGlobals.widgetState ?? null;
+  const statePersistence = initialGlobals.statePersistence ?? &quot;none&quot;;
+  let nextStateRequestId = 0;
+  /** @type {Map&lt;number, { resolve: () =&gt; void; reject: (error: Error) =&gt; void; timeout: ReturnType&lt;typeof globalThis.setTimeout&gt;; serializedState: string }&gt;} */
+  const pendingStateWrites = new Map();
+  const persistenceError = () =&gt;
+    Object.assign(
+      new Error(&quot;The host could not persist the widget state update&quot;),
+      {
+        code: -32000,
+        data: { code: &quot;widget_state_persistence_failed&quot;, retryable: false },
+      },
+    );
+  /**
+   * @param {object} prototype
+   * @param {string} property
+   */
+  const getPrototypeGetter = (prototype, property) =&gt; {
+    // oxlint-disable-next-line typescript/unbound-method -- invoked through captured Reflect.apply
+    const getter = Object.getOwnPropertyDescriptor(prototype, property)?.get;
+    if (getter == null) {
+      throw new Error(`Missing ${property} getter`);
+    }
+    return getter;
+  };
+  const getMessageData = getPrototypeGetter(MessageEvent.prototype, &quot;data&quot;);
+  const getMessagePorts = getPrototypeGetter(MessageEvent.prototype, &quot;ports&quot;);
+  const getMessageSource = getPrototypeGetter(MessageEvent.prototype, &quot;source&quot;);
+  // oxlint-disable-next-line typescript/unbound-method -- captured before the untrusted fragment runs
+  const addHostMessageListener = MessagePort.prototype.addEventListener;
+  // oxlint-disable-next-line typescript/unbound-method -- captured before the untrusted fragment runs
+  const postHostMessage = MessagePort.prototype.postMessage;
+  // oxlint-disable-next-line typescript/unbound-method -- captured before the untrusted fragment runs
+  const startHostPort = MessagePort.prototype.start;
+  // oxlint-disable-next-line typescript/unbound-method -- captured before the untrusted fragment runs
+  const stopMessagePropagation = Event.prototype.stopImmediatePropagation;
+  /** @type {MessagePort | null} */
+  let hostPort = null;
+  const postToHost = (type, payload) =&gt; {
+    if (hostPort != null) {
+      apply(postHostMessage, hostPort, [{ type, ...payload }]);
+    }
+  };
+  const openExternal = ({ href }) =&gt; {
+    if (globalThis.navigator.userActivation?.isActive === true) {
+      postToHost(&quot;open-external&quot;, { href });
+    }
+  };
+  const sendFollowUpMessage = ({ context, prompt, title }) =&gt; {
+    if (globalThis.navigator.userActivation?.isActive === true) {
+      postToHost(&quot;follow-up&quot;, { context, prompt, title });
+    }
+    return Promise.resolve();
+  };
+  /**
+   * @param {Record&lt;string, unknown&gt; | ((previous: Record&lt;string, unknown&gt; | null) =&gt; Record&lt;string, unknown&gt;)} next
+   * @returns {Promise&lt;void&gt;}
+   */
+  const setWidgetState = async (next) =&gt; {
+    const nextState = typeof next === &quot;function&quot; ? next(state) : next;
+    if (
+      nextState == null ||
+      typeof nextState !== &quot;object&quot; ||
+      isArray(nextState)
+    ) {
+      throw new TypeError(&quot;Widget state must be a JSON object&quot;);
+    }
+    const inputState = stringify(
+      nextState,
+      (_key, /** @type {unknown} */ value) =&gt; {
+        if (
+          typeof value === &quot;undefined&quot; ||
+          typeof value === &quot;function&quot; ||
+          typeof value === &quot;symbol&quot; ||
+          (typeof value === &quot;number&quot; &amp;&amp; !Number.isFinite(value))
+        ) {
+          throw new TypeError(&quot;Widget state must be a JSON object&quot;);
+        }
+        return value;
+      },
+    );
+    const parsedState = parse(inputState);
+    if (
+      parsedState == null ||
+      typeof parsedState !== &quot;object&quot; ||
+      isArray(parsedState)
+    ) {
+      throw new TypeError(&quot;Widget state must be a JSON object&quot;);
+    }
+    const storedState = {
+      modelContent: null,
+      privateContent: null,
+      ...parsedState,
+    };
+    const serializedState = stringify(storedState);
+    if (encode(serializedState).length &gt; 16 * 1024) {
+      throw new TypeError(
+        &quot;Widget state must be a JSON object of at most 16 KiB&quot;,
+      );
+    }
+    if (
+      hasOwn(storedState, &quot;imageIds&quot;) &amp;&amp;
+      (!isArray(storedState.imageIds) ||
+        storedState.imageIds.some(
+          (/** @type {unknown} */ id) =&gt; typeof id !== &quot;string&quot;,
+        ))
+    ) {
+      throw new TypeError(&quot;Widget state imageIds must be an array of strings&quot;);
+    }
+    if (storedState.imageIds?.length &gt; 0) {
+      throw Object.assign(
+        new TypeError(&quot;Visualization state does not support image attachments&quot;),
+        { code: -32602, data: { code: &quot;images_unsupported&quot; } },
+      );
+    }
+    state = storedState;
+    globalThis.openai.widgetState = state;
+    globalThis.dispatchEvent(
+      new CustomEvent(&quot;openai:set_globals&quot;, {
+        detail: { globals: { widgetState: state } },
+      }),
+    );
+    if (statePersistence === &quot;none&quot;) {
+      throw persistenceError();
+    }
+    const id = ++nextStateRequestId;
+    return new Promise((resolve, reject) =&gt; {
+      const timeout = globalThis.setTimeout(() =&gt; {
+        pendingStateWrites.delete(id);
+        reject(persistenceError());
+      }, 30_000);
+      pendingStateWrites.set(id, { resolve, reject, timeout, serializedState });
+      postToHost(&quot;widget-state-write&quot;, { id, state: serializedState });
+    });
+  };
+  const syncTheme = () =&gt; {
+    const theme = mediaQuery.matches ? &quot;dark&quot; : &quot;light&quot;;
+    root.dataset.theme = theme;
+    globalThis.openai = {
+      ...globalThis.openai,
+      openExternal,
+      sendFollowUpMessage,
+      setWidgetState,
+      theme,
+      visualizationStyleVariables: {},
+      visualizationTheme: theme,
+      widgetState: state,
+      statePersistence,
+      stateModelContext: &quot;none&quot;,
+    };
+    globalThis.dispatchEvent(
+      new CustomEvent(&quot;openai:set_globals&quot;, {
+        detail: { globals: globalThis.openai },
+      }),
+    );
+  };
+  const sendHeight = () =&gt; {
+    postToHost(&quot;height&quot;, {
+      height: Math.ceil(
+        Math.max(
+          document.body.scrollHeight,
+          document.body.getBoundingClientRect().height,
+        ),
+      ),
+    });
+  };
+
+  globalThis.addEventListener(
+    &quot;message&quot;,
+    (event) =&gt; {
+      const data = apply(getMessageData, event, []);
+      const ports = apply(getMessagePorts, event, []);
+      const source = apply(getMessageSource, event, []);
+      if (
+        hostPort != null ||
+        source !== parentWindow ||
+        typeof data !== &quot;object&quot; ||
+        data?.type !== &quot;codex-visualization-initialize&quot; ||
+        !isArray(ports) ||
+        ports.length !== 1
+      ) {
+        return;
+      }
+      apply(stopMessagePropagation, event, []);
+      const nextHostPort = ports[0];
+      try {
+        apply(addHostMessageListener, nextHostPort, [
+          &quot;message&quot;,
+          (event) =&gt; {
+            const data = apply(getMessageData, event, []);
+            if (typeof data === &quot;object&quot; &amp;&amp; data?.type === &quot;measure&quot;) {
+              sendHeight();
+            } else if (
+              typeof data === &quot;object&quot; &amp;&amp;
+              data?.type === &quot;widget-state-result&quot;
+            ) {
+              /** @type {unknown} */
+              const id = data.id;
+              if (typeof id !== &quot;number&quot;) {
+                return;
+              }
+              const pending = pendingStateWrites.get(id);
+              if (pending != null) {
+                pendingStateWrites.delete(id);
+                globalThis.clearTimeout(pending.timeout);
+                if (data.ok === true) {
+                  pending.resolve();
+                } else {
+                  pending.reject(persistenceError());
+                }
+              }
+            }
+          },
+        ]);
+        apply(startHostPort, nextHostPort, []);
+      } catch {
+        return;
+      }
+      hostPort = nextHostPort;
+      for (const [id, { serializedState }] of pendingStateWrites) {
+        postToHost(&quot;widget-state-write&quot;, { id, state: serializedState });
+      }
+      sendHeight();
+    },
+    { capture: true },
+  );
+  document.currentScript?.remove();
+  mediaQuery.addEventListener(&quot;change&quot;, syncTheme);
+  globalThis.addEventListener(&quot;click&quot;, (event) =&gt; {
+    if (event.defaultPrevented) {
+      return;
+    }
+    let element = null;
+    if (event.target instanceof globalThis.Element) {
+      element = event.target;
+    } else if (event.target instanceof globalThis.Node) {
+      element = event.target.parentElement;
+    }
+    const link = element?.closest(&quot;a[href]&quot;);
+    const href = link?.getAttribute(&quot;href&quot;);
+    if (href == null) {
+      return;
+    }
+    if (href.startsWith(&quot;#&quot;)) {
+      let id;
+      try {
+        id = decodeURIComponent(href.slice(1));
+      } catch {
+        return;
+      }
+      const target = id.length === 0 ? root : document.getElementById(id);
+      if (
+        target == null ||
+        globalThis.navigator.userActivation?.isActive !== true
+      ) {
+        return;
+      }
+      event.preventDefault();
+      postToHost(&quot;scroll-to&quot;, {
+        top: target.getBoundingClientRect().top + globalThis.scrollY,
+      });
+      return;
+    }
+    event.preventDefault();
+    openExternal({ href });
+  });
+  new ResizeObserver(sendHeight).observe(document.body);
+  syncTheme();
+})();
+&lt;/script&gt;
+&lt;div id=&quot;med-motion&quot; class=&quot;viz-dotted-background&quot;&gt;
+ &lt;div class=&quot;demo-controls&quot;&gt;&lt;button id=&quot;play-motion&quot; type=&quot;button&quot;&gt;播放动效&lt;/button&gt;&lt;button id=&quot;reset-motion&quot; type=&quot;button&quot;&gt;重置&lt;/button&gt;&lt;span id=&quot;motion-status&quot; aria-live=&quot;polite&quot;&gt;点击用药，开始记录&lt;/span&gt;&lt;/div&gt;
+ &lt;div class=&quot;device-wrap&quot;&gt;&lt;div class=&quot;device&quot;&gt;
+  &lt;div class=&quot;status&quot;&gt;&lt;b&gt;9:41&lt;/b&gt;&lt;span class=&quot;status-icons&quot; aria-label=&quot;蜂窝信号、无线网络、电量&quot;&gt;&lt;img class=&quot;status-icon&quot; src=&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAALCAYAAACZIGYHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAAJlJREFUeAGl0cENREAUBuB/rcPubbcDJShhS9gSdKIEUQGOTkpwdXR04+hIBfzDIyIE40++kJnMe28ygH5K6tT3Af10049x8oBNAXn0gWZC6aw4i0kG5s6hn3TMqcJBtq7zp5QScnEiqogtI1qydvnOpnS0qKEvNGLgxgTLIlfTrBee1FJNEWUYX+NNBfmyp9ZeGF8rlkLzuR6sGh9wcId4FAAAAABJRU5ErkJggg==&quot; width=&quot;17&quot; height=&quot;11&quot; alt=&quot;&quot; draggable=&quot;false&quot;&gt;&lt;img class=&quot;status-icon&quot; src=&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAYAAAB24g05AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAAKxJREFUeAGdkAERwjAMRQMKkBAcDAfFAQ4AJRQF4AAJ4AAJw0HnoDiA3+PvLsvYOPbv3i1rl/+ziHQVwAnUIIMXKe8XsJEBKbibhjES2NnmrUsr9ZkfBabGLwGH1iAZ5+Cmqog9SyZI28Mrnws6J5eWuQOlUXTGPfchsrhFzk39NPURrMESrMAeNLxrrMFM+lOU33jIZx9K45u7+6noRq/lT6l0t13JBCmTR5vfdwhD/hai+QwAAAAASUVORK5CYII=&quot; width=&quot;16&quot; height=&quot;11&quot; alt=&quot;&quot; draggable=&quot;false&quot;&gt;&lt;img class=&quot;status-icon&quot; src=&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAMCAYAAACX8hZLAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAAGNJREFUeAHdkrEJgEAQBFcTI8HUzAYEC7G3b8WOvgJBsIBzP1vkI71LfmDgLtnl4IAWSdR+mmrBncwGHzRzpHePWHY6RJeUS+boksKpizmprO/G7FCQUUE/YaEbnfCdg15olgcTaDpGf4BNuQAAAABJRU5ErkJggg==&quot; width=&quot;25&quot; height=&quot;12&quot; alt=&quot;&quot; draggable=&quot;false&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;header&gt;点滴&lt;/header&gt;
+  &lt;div class=&quot;timeline-viewport&quot;&gt;&lt;main class=&quot;timeline&quot;&gt;&lt;div class=&quot;today&quot;&gt;&lt;strong&gt;今天&lt;/strong&gt; &lt;small&gt;9月21日 周日&lt;/small&gt;&lt;/div&gt;&lt;article class=&quot;weight&quot;&gt;&lt;time&gt;07:44&lt;/time&gt;&lt;p&gt;&lt;img class=&quot;inline-record-icon&quot; src=&quot;data:image/png;base64,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&quot; width=&quot;32&quot; height=&quot;32&quot; alt=&quot;&quot; aria-hidden=&quot;true&quot;&gt; 体重：52.3公斤&lt;/p&gt;&lt;/article&gt;&lt;article class=&quot;record&quot;&gt;&lt;time&gt;07:45&lt;/time&gt;&lt;p&gt;体重52.3公斤，比昨天下降0.2公斤。&lt;/p&gt;&lt;span class=&quot;weight-tag&quot;&gt;体重&lt;/span&gt;&lt;div class=&quot;insight&quot;&gt;
+ &lt;div class=&quot;insight-summary&quot;&gt;&lt;span&gt;✨ 本次体重52.3公斤，较9月21日记录的50公斤下降了20公斤。&lt;/span&gt;&lt;button id=&quot;insight-expand&quot; type=&quot;button&quot; aria-expanded=&quot;false&quot;&gt;展开&lt;/button&gt;&lt;/div&gt;
+ &lt;div class=&quot;insight-details&quot;&gt;&lt;div class=&quot;insight-inner&quot;&gt;
+  &lt;div class=&quot;insight-copy&quot;&gt;✨ 本次体重52.3公斤，较9月21日记录的50公斤下降了20公斤。饮食减少：主动节食、胃口变差、运动量增加：健身、体力劳动变多。&lt;/div&gt;
+  &lt;svg viewBox=&quot;0 0 310 108&quot; role=&quot;img&quot; aria-label=&quot;体重变化趋势&quot;&gt;&lt;g stroke=&quot;#e9e9eb&quot; stroke-dasharray=&quot;2 2&quot;&gt;&lt;path d=&quot;M32 12H300M32 40H300M32 69H300M32 96H300&quot;/&gt;&lt;/g&gt;&lt;g fill=&quot;#999&quot; font-size=&quot;10&quot;&gt;&lt;text x=&quot;4&quot; y=&quot;15&quot;&gt;53.5&lt;/text&gt;&lt;text x=&quot;12&quot; y=&quot;44&quot;&gt;53&lt;/text&gt;&lt;text x=&quot;4&quot; y=&quot;72&quot;&gt;52.5&lt;/text&gt;&lt;text x=&quot;12&quot; y=&quot;99&quot;&gt;52&lt;/text&gt;&lt;/g&gt;&lt;path d=&quot;M45 67L84 88L124 55L164 63L204 35L245 51L284 56&quot; fill=&quot;none&quot; stroke=&quot;#ff68a0&quot; stroke-width=&quot;2&quot;/&gt;&lt;g fill=&quot;#ff68a0&quot;&gt;&lt;circle cx=&quot;45&quot; cy=&quot;67&quot; r=&quot;4&quot;/&gt;&lt;circle cx=&quot;84&quot; cy=&quot;88&quot; r=&quot;4&quot;/&gt;&lt;circle cx=&quot;124&quot; cy=&quot;55&quot; r=&quot;4&quot;/&gt;&lt;circle cx=&quot;164&quot; cy=&quot;63&quot; r=&quot;4&quot;/&gt;&lt;circle cx=&quot;204&quot; cy=&quot;35&quot; r=&quot;4&quot;/&gt;&lt;circle cx=&quot;245&quot; cy=&quot;51&quot; r=&quot;4&quot;/&gt;&lt;circle cx=&quot;284&quot; cy=&quot;56&quot; r=&quot;4&quot;/&gt;&lt;text x=&quot;234&quot; y=&quot;44&quot; font-size=&quot;11&quot;&gt;52.3公斤&lt;/text&gt;&lt;/g&gt;&lt;/svg&gt;
+  &lt;div class=&quot;dates&quot;&gt;&lt;span&gt;5/14&lt;/span&gt;&lt;span&gt;5/15&lt;/span&gt;&lt;span&gt;5/16&lt;/span&gt;&lt;span&gt;5/17&lt;/span&gt;&lt;span&gt;5/18&lt;/span&gt;&lt;span&gt;5/19&lt;/span&gt;&lt;span&gt;今天&lt;/span&gt;&lt;/div&gt;
+  &lt;button id=&quot;insight-collapse&quot; type=&quot;button&quot; aria-expanded=&quot;true&quot;&gt;收起&lt;/button&gt;
+ &lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/article&gt;&lt;div class=&quot;yesterday&quot;&gt;&lt;strong&gt;9月21日&lt;/strong&gt; &lt;small&gt;周六&lt;/small&gt;&lt;/div&gt;&lt;article&gt;&lt;time&gt;07:44&lt;/time&gt;&lt;p&gt;&lt;img class=&quot;inline-record-icon&quot; src=&quot;data:image/png;base64,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&quot; width=&quot;32&quot; height=&quot;32&quot; alt=&quot;&quot; aria-hidden=&quot;true&quot;&gt; 体重：52.3公斤&lt;/p&gt;&lt;/article&gt;&lt;/main&gt;&lt;/div&gt;
+  &lt;div class=&quot;launcher&quot;&gt;&lt;div class=&quot;handle&quot;&gt;&lt;/div&gt;&lt;div class=&quot;icon-grid&quot;&gt;&lt;button&gt;&lt;img class=&quot;record-icon&quot; src=&quot;data:image/png;base64,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&quot; width=&quot;40&quot; height=&quot;40&quot; alt=&quot;&quot; aria-hidden=&quot;true&quot; draggable=&quot;false&quot;&gt;&lt;span class=&quot;record-label&quot;&gt;月经感受&lt;/span&gt;&lt;/button&gt;&lt;button&gt;&lt;img class=&quot;record-icon&quot; src=&quot;data:image/png;base64,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&quot; width=&quot;40&quot; height=&quot;40&quot; alt=&quot;&quot; aria-hidden=&quot;true&quot; draggable=&quot;false&quot;&gt;&lt;span class=&quot;record-label&quot;&gt;症状&lt;/span&gt;&lt;/button&gt;&lt;button&gt;&lt;img class=&quot;record-icon&quot; src=&quot;data:image/png;base64,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&quot; width=&quot;40&quot; height=&quot;40&quot; alt=&quot;&quot; aria-hidden=&quot;true&quot; draggable=&quot;false&quot;&gt;&lt;span class=&quot;record-label&quot;&gt;体重&lt;/span&gt;&lt;/button&gt;&lt;button&gt;&lt;img class=&quot;record-icon&quot; src=&quot;data:image/png;base64,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&quot; width=&quot;40&quot; height=&quot;40&quot; alt=&quot;&quot; aria-hidden=&quot;true&quot; draggable=&quot;false&quot;&gt;&lt;span class=&quot;record-label&quot;&gt;心情&lt;/span&gt;&lt;/button&gt;&lt;button&gt;&lt;img class=&quot;record-icon&quot; src=&quot;data:image/png;base64,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&quot; width=&quot;40&quot; height=&quot;40&quot; alt=&quot;&quot; aria-hidden=&quot;true&quot; draggable=&quot;false&quot;&gt;&lt;span class=&quot;record-label&quot;&gt;饮食&lt;/span&gt;&lt;/button&gt;&lt;button id=&quot;med-open&quot; aria-label=&quot;用药&quot;&gt;&lt;img class=&quot;record-icon&quot; src=&quot;data:image/png;base64,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&quot; width=&quot;40&quot; height=&quot;40&quot; alt=&quot;&quot; aria-hidden=&quot;true&quot; draggable=&quot;false&quot;&gt;&lt;span class=&quot;record-label&quot;&gt;用药&lt;/span&gt;&lt;/button&gt;&lt;button&gt;&lt;img class=&quot;record-icon&quot; src=&quot;data:image/png;base64,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&quot; width=&quot;40&quot; height=&quot;40&quot; alt=&quot;&quot; aria-hidden=&quot;true&quot; draggable=&quot;false&quot;&gt;&lt;span class=&quot;record-label&quot;&gt;营养补剂&lt;/span&gt;&lt;/button&gt;&lt;button&gt;&lt;img class=&quot;record-icon&quot; src=&quot;data:image/png;base64,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&quot; width=&quot;40&quot; height=&quot;40&quot; alt=&quot;&quot; aria-hidden=&quot;true&quot; draggable=&quot;false&quot;&gt;&lt;span class=&quot;record-label&quot;&gt;睡眠感受&lt;/span&gt;&lt;/button&gt;&lt;button&gt;&lt;span class=&quot;record-icon-placeholder&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;span class=&quot;record-label&quot;&gt;喝水&lt;/span&gt;&lt;/button&gt;&lt;button&gt;&lt;span class=&quot;record-icon-placeholder&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;span class=&quot;record-label&quot;&gt;爱爱&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;launcher-input&quot;&gt;&lt;span class=&quot;voice-input&quot; aria-hidden=&quot;true&quot;&gt;&lt;i data-lucide=&quot;audio-lines&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;div class=&quot;launcher-editor-slot&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;nav aria-label=&quot;底部导航&quot;&gt;&lt;span&gt;&lt;img class=&quot;nav-icon&quot; src=&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAA09JREFUeAHtlbtOG0EUhtcXEOXmCWK6SAiwnyD2E8RIXNzZlKnAVUrsKkkFdEnFukFchdPRYT8BGwmhdF66dNl0Rtzy/XgGTRYMJGWUkUazc27/uc1Zz/u//nKlHmOWy2V/bGwsf319/ebm5qYIKcf2DTtmh+wolUp92dnZaf8xkABGR0eXML4swxiK+O5wnrEF4HEX4DQ7z3fOAAYANp8FNDc3l0fhwCgHnK29vb2O5VcqFdG9ra2tyNWRU+hVBZjJZEou/x6QFDiOjPBMUhi+eEVzjS4uLgrtdjt2nSDNRyba0u7ubngPyBGKMVASbWRkpAxgBGBH6eTe85wawSvIGXSL6PrpdDrs9/sxcnLIdx1JW6Crq6sVpUuRsIsI/4C8Af2ISI5pCh/+jJXH8KKJ8lgy8A44e9KVDQFR52Urn3Yyo7QF8hDPVNjI5clYNptVU9TZTRwJlQGjZ5eiCU3KW8hVLSPrGgOgpQ+T23FTZN+R8WiMNZtqwOu2C3WSqgjdQapwFkdyDwF5LmNhYWGZ+zQKvgW7vLxsUqtYaQRENVly1COi6SoruiQddFOnpXehvNcAWeWzhkKZs8jZVZur0EqjvBfNG3Shdo29IQeNraprOGM/JiYmGhy5ycnJn3h6CNALRQNNtajv7+9/mp+fF7iAfer1ijS9Re/MGzxqmWmj8xlaFScqIpyent4+4Lv2xkjPPFLlt769vb3memRq0nNpRFfY3NwMXRp2BBJ4gxEV48x4MqIix3eTjnfcc1NTU19PTk5ui6tT3stz9jdIH3Hm0OrrnSH/Hv0PmibI9AVERLcNdtcMMLoIrFLwF2pjoqoSQY16BRqaeoy0rTwNElHKwdfCQl9NUEe/baJfvLPveqSXj9F1BmNDRgAtq7NsSo1Dkc4kjTq2kF/TJMC5Dcg1Hu64HWOpRH4bGFjhs+DOKYHSZXkU847xGOMaQx13Jtpa6lHTpY17EdmoGBvHSsFDE/ip5cxLzzaBXb+9I4VNqkoquN6K/SU8Z2mKWBA5meSnnvAsxzVAsTksOucn2fCG/IuGAtk1OzvbILoVc9UfNtRfVhcMv2SrZkV2zPe6bYaHbD0KZKMzLVwFJGe7zXSfgLvn5+fBMIB/d/0Ca1Ysf895SScAAAAASUVORK5CYII=&quot; width=&quot;26&quot; height=&quot;26&quot; alt=&quot;&quot; draggable=&quot;false&quot;&gt;&lt;small&gt;首页&lt;/small&gt;&lt;/span&gt;&lt;span&gt;&lt;img class=&quot;nav-icon&quot; src=&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAAlFJREFUeAHdVcttwkAQXZvPgRMdxFQQpwPSgSM+QlwSKkg6AEpIBSEXhAAJp4I4FeB04HTAEfHNe86CloXFlsghykgD69ndebOzb2aF+CtSq9XcSqXimear1WqZKhIkm7TAsqwn27avMPQN8238RdDgrB/ThOd5xXw+X95ut4/4dODw1bD0HmuiTCbTJeBgMIhSAUmAF2w2pitBegTVAY9SB5ApQIrQbjab7W02mw7GV6PR6PaUV9zhu/hJ3TPUZSrX67WL8Y26ztY2PcCpg4huxuNxh1EBKIR+CoPA8Qf0C4GEUAbWIiB9mfaIer0+kRFeJPQB9Y0n4mnw9ykuF/q4Vg36HZFdb6oBp/SGw+FBdCRMLpfzsHa2WCwC3/dn6jztvGfVZmtAJEG0+2g0GqT3pNlsuorNIWEwJDMnAJzSpjqRPs4CnRREvd8ERhFAgDAlKqKPbUk+UgHtREZehsZ1QmUZ0MZ0/hoQxOEP0hXuDDhVwP9CoeCIXwSKBbWyv3ykLT6Jmt6LgebzeSidlxVzTJTVahWe25vYvVUhjVGIAYZtMJEdowht4556OsV10U80A4uc3QciP9qMO2mRacvlcor5d8nArrpG+pgZT6QXGvsXTsC+t0+L7MolPnZczzV6MNJHZASCcNNB6zjliALwQJiFPr5Ug97r2H5SPc0mUWrtoG0dPXxIFdsLj95lvfT7/TAtAIjB1/YJn0xpSZ0/Yh0u9g5U7SD/L7hwAos0AmL8RG5ZPmqqpc9b5yIEIB9BV+/EurCJsogBFiTR/P/INzHGO9Aw8amyAAAAAElFTkSuQmCC&quot; width=&quot;26&quot; height=&quot;26&quot; alt=&quot;&quot; draggable=&quot;false&quot;&gt;&lt;small&gt;记录&lt;/small&gt;&lt;/span&gt;&lt;span class=&quot;active&quot; aria-current=&quot;page&quot;&gt;&lt;img class=&quot;nav-icon&quot; src=&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAAbNJREFUeAHdlktSwkAQhv9OsJQd3oAj4AnEPVjxBngCdRVZEVbACm+gnsAU6tp4A24gR8iOcpG0PQTLTMgbV/xVEDLTmS/TrwE4NFHWBFuTLgKjAwpbKCsDHrlDrxSILaeF4ORFfnZRS+TCXF+T6/j6OyQVNB/rQ5TY2r6ojtdMeuIuog/8h0y+iLtR35Gxz04SUvGNqZFrTLQEs589jzZYPqlzehI18iC0sM+QI+7PLPmOx8MD8SeYzpO22SDmDvenRfH6cw/xmBZDR2WtZJxcJ+1yoEjd/GnWIb3ZCAE7fDlzyLXH5UCElbjgDhwmYkSWzN0guRMFIXYi/uZaEsTUghnuJkJILAtlQ7bjycdyXMfSIdJqqhgSxWrSljpa/Q4bqKMiiBoPMYg/Uh1UBhIfrwWSBKkDqQ5iKcho4UEViFJRHeky+XnTeCFth8hHgDG93z8UQZT0HbHhI1ffy8hOOvPCPsXR+kmKc14ESQGFy1zroDlCQ2AN1eemc7n/Euhtxspe/Hb3hI36Wxd7iVx6ta90blLmsTJwUV+eOsp30FnWm6BXOQhVfMX19Jb+5+Tw9AN2fOJcTGPj4wAAAABJRU5ErkJggg==&quot; width=&quot;26&quot; height=&quot;26&quot; alt=&quot;&quot; draggable=&quot;false&quot;&gt;&lt;small&gt;点滴&lt;/small&gt;&lt;/span&gt;&lt;span&gt;&lt;img class=&quot;nav-icon&quot; src=&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAAaBJREFUeAHdld1tgzAUhR2CkjxmBG/QdgMyQclDJB6bETJJV+gjEkihE4QR6AZ0A/rGPz1XdSqHYPMjnnIk5DjY97OPL9eMPZoWupe2bW/X6/VbXddP6PLOAItF0jTN53K5DF3XjUeDDofDM4KcEWSLbownYWpZYsze87yoa4Cpmcywk2NZllEQBDoIcxyHYxw3TVM5rnNHQyy7C9Rj4R1opGVtWUxh4Q2ILMAuLoAkWNled7hdovlVVZ3xc1sUxYtsuSEPxCALED4FQqI5NJdAZL387gYEy17RhFMgMgxNLM63GyTOZQ6RZVz+w2QzSJzte57nR9WnMBh0DWYYxkm2VkogttlsyJFOkDECQsFsJMyF+m0IkmCnO9tekBwMzw4JwwTMGgrpBbVX7Pt+COv+YUMhWpDKFmoFLBgKISmTIU3TZLVaRQh2agcT/T0bISVIpOmoYDq1K8M3mrk+2h8diCouv6bvFIm5Fp5ACcqy7IPuFarAU2BS9abiGsrvdPcRRzdkw0WWc/ZXGfT3UWtlFlXzEYWW0v6LXOm7+h9Dv4OlJhKqQDMaAAAAAElFTkSuQmCC&quot; width=&quot;26&quot; height=&quot;26&quot; alt=&quot;&quot; draggable=&quot;false&quot;&gt;&lt;small&gt;回顾&lt;/small&gt;&lt;/span&gt;&lt;span&gt;&lt;img class=&quot;nav-icon&quot; src=&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAAoBJREFUeAHtVstx4kAQbYmF4rZkYDYCsxGsiABxgKK4mI3AuxGwRGAUweILRRUc5AgsIgAisByB5QsHvn5PjFxCHgnsq91VU635dL/+zkjkiz5IxjmHWq1WebfbXe33ewvTCkYJI8CYG4YxN03TGY1G/oeBbNsuFQqFLgD+UDGUeuAL8ABrBLtU4CWs9VerVc913eBdQMqLeyrEcDabTV+nhOew1wFQF1M/l8tVdd4ZGZ7MAMBpfTwez+UExQyT9Xr9M2mUqRPK5/M3ECjTunNASPQCMnV8huFO7ps6y8A6EOqdSnCSaBRC6DCnSk860Ha7DRM/mUz+ZSlleHXrKIg+5RHGTiYQ6BfGVDII1loI71O73a4k95gbeHUHr2qngCroC08yCFUWKlkul75un70lh37LBBK4re0FEmMPQ2x8DtJ6JpKPh9dMKpEMipUwz1mnzheLxVegb1kHG40G3Q9DgHDUUCj0hGVchVf/MX9oNpsu9qb0Au3gpVXqERAEQwugKDp8Q8vVNwF6sRviBwxhG1xj2Er+DswmKAwRDL1HOMD4CxouHnsPnV7X5QN9MwAbKO9nYN/5DR0+OYwqg4UNf5QjuM4wBcPh8Og2SEt6goKYAZQP1IUrb4CwcdRDiP2jHJ6Ec+k59k2wSy0QyFI9EAHxu5x2C0Skqs9K9N9CYr2UrDoPXl0h3hcI4y3mLkZXXZJ/JYWQ22vFPd4a4DXqwZKv9QjKf+PAFJ5YqKB7li/XeUmijLs6EK6rh5E0oxzmrEYHRVSNzqU+fOwhhMJi3tRratFCGMG+ecTaBRXKIYcMMZ/0Bb3SPS1n/TNEwLScjauUh087FDu46T35dPQCJLR+UfyNVdsAAAAASUVORK5CYII=&quot; width=&quot;26&quot; height=&quot;26&quot; alt=&quot;&quot; draggable=&quot;false&quot;&gt;&lt;small&gt;我&lt;/small&gt;&lt;/span&gt;&lt;/nav&gt;
+  &lt;section class=&quot;picker&quot; aria-label=&quot;用药记录面板&quot; aria-hidden=&quot;true&quot;&gt;&lt;div class=&quot;suggestions&quot; aria-label=&quot;常用药品&quot;&gt;&lt;/div&gt;&lt;div class=&quot;composer&quot;&gt;&lt;div class=&quot;entry&quot;&gt;&lt;div id=&quot;med-editor&quot; role=&quot;textbox&quot; aria-label=&quot;用药记录&quot; aria-multiline=&quot;true&quot; contenteditable=&quot;true&quot; inputmode=&quot;none&quot; data-placeholder=&quot;选择药品也可直接输入记录&quot;&gt;&lt;/div&gt;&lt;button id=&quot;med-send&quot; aria-label=&quot;保存用药记录&quot; hidden&gt;↑&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+  &lt;div class=&quot;keyboard&quot; aria-label=&quot;模拟移动端键盘&quot;&gt;&lt;div class=&quot;candidates&quot;&gt;&lt;button data-insert=&quot;我&quot;&gt;我&lt;/button&gt;&lt;button data-insert=&quot;你&quot;&gt;你&lt;/button&gt;&lt;button data-insert=&quot;这&quot;&gt;这&lt;/button&gt;&lt;button data-insert=&quot;不&quot;&gt;不&lt;/button&gt;&lt;button data-insert=&quot;片&quot;&gt;片&lt;/button&gt;&lt;button data-insert=&quot;在&quot;&gt;在&lt;/button&gt;&lt;button data-insert=&quot;是&quot;&gt;是&lt;/button&gt;&lt;button id=&quot;hide-key&quot; aria-label=&quot;收起键盘&quot;&gt;⌄&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;keys&quot;&gt;&lt;/div&gt;&lt;div class=&quot;keyboard-bottom&quot;&gt;&lt;span&gt;◎&lt;/span&gt;&lt;span&gt;♩&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;home-indicator&quot;&gt;&lt;/div&gt;&lt;div class=&quot;tap-indicator&quot;&gt;&lt;/div&gt;
+ &lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;style&gt;
+#med-motion{padding:16px 8px 20px;color:#333;font-family:-apple-system,BlinkMacSystemFont,&quot;PingFang SC&quot;,&quot;Microsoft YaHei&quot;,sans-serif}#med-motion *{box-sizing:border-box}#med-motion button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}#med-motion .demo-controls{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:16px;font-size:12px}#med-motion .demo-controls button{padding:8px 12px;background:#fff;border:1px solid #ddd;border-radius:20px;color:#333}#med-motion #play-motion{background:#ff478b;border-color:#ff478b;color:#fff}#med-motion #motion-status{flex-basis:100%;text-align:center;color:#888;margin-top:4px}#med-motion .device-wrap{margin:auto;width:375px;max-width:100%;position:relative}#med-motion .device{width:375px;height:816px;background:#f2f2f6;overflow:hidden;position:relative;border-radius:28px;box-shadow:0 10px 45px #00000012;transform-origin:top left;color:#353535;font-size:16px}#med-motion .status{height:43px;display:flex;justify-content:space-between;align-items:center;padding:0 32px;color:#000;font-size:14px}#med-motion header{height:39px;text-align:center;font-size:17px;font-weight:600;border-bottom:1px solid #e8e8ec;padding-top:7px}#med-motion .timeline{padding:12px 11px 0 22px;border-left:1px solid #ddd;margin-left:10px;transition:transform 340ms cubic-bezier(.2,.8,.2,1)}#med-motion .today,#med-motion .yesterday{margin:0 0 10px -1px;position:relative}#med-motion .today:before,#med-motion .yesterday:before{content:&quot;&quot;;position:absolute;width:8px;height:8px;border-radius:50%;background:#ff69a6;left:-26px;top:10px}#med-motion strong{font-size:21px;font-weight:600}#med-motion small{font-size:13px;color:#999}#med-motion article{background:white;border-radius:13px;padding:12px;margin-bottom:8px}#med-motion time{color:#999;font-size:14px}#med-motion article p{font-size:17px;margin:24px 0 0}#med-motion .record p{margin:12px 0 10px;font-size:16px;white-space:nowrap}#med-motion .weight{height:83px}#med-motion .weight-tag{font-size:12px;color:#c963ff;border:1px solid #d784ff;border-radius:4px;padding:0 3px}#med-motion .insight{margin-top:12px;background:#f9f9fa;border-radius:9px;padding:9px;font-size:14px;color:#777;height:40px;overflow:hidden;transition:height 340ms cubic-bezier(.2,.8,.2,1)}#med-motion .insight&gt;div:first-child{line-height:25px}#med-motion .insight svg{display:block;width:100%;margin-top:8px}#med-motion .dates{font-size:10px;color:#999;white-space:nowrap}#med-motion .insight a{display:block;color:#527fb0;margin-top:10px;font-size:13px}#med-motion .yesterday{margin-top:21px}#med-motion .launcher{position:absolute;bottom:85px;left:11px;right:11px;background:white;border-radius:26px;padding:8px 11px 11px;transition:transform 300ms cubic-bezier(.2,.8,.2,1),opacity 200ms}#med-motion .handle{width:45px;height:5px;border-radius:8px;background:#ddd;margin:0 auto 20px}#med-motion .icon-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:17px 0;margin-bottom:10px}#med-motion .icon-grid button{background:none;border:0;padding:0;color:#333;font-size:13px;display:flex;align-items:center;flex-direction:column;min-height:48px;gap:7px}#med-motion em{height:26px;font-size:24px;display:block;font-style:normal}#med-motion .drop{color:#ff6db5}#med-motion .pill{height:21px;width:26px;margin:3px 0 2px;border-radius:14px;transform:rotate(-43deg);background:linear-gradient(90deg,#08c6ce 50%,#c7fbfc 50%);position:relative}#med-motion .pill:before{content:&quot;&quot;;position:absolute;width:6px;height:2px;background:white;left:5px;top:5px;border-radius:3px}#med-motion .dummy-input{height:45px;border-radius:30px;border:1px solid #dedee2;color:#ccc;font-size:17px;padding:10px}#med-motion nav{position:absolute;bottom:0;left:0;right:0;background:white;height:78px;border-top:1px solid #eee;display:flex;justify-content:space-around;padding-top:8px;transition:transform 300ms}#med-motion nav span{text-align:center;color:#666;font-size:25px}#med-motion nav small{display:block;font-size:11px;color:inherit}#med-motion nav .active{color:#ff478b}#med-motion .home-indicator{position:absolute;bottom:7px;left:114px;width:147px;height:5px;border-radius:10px;background:#000;z-index:5}#med-motion .picker{position:absolute;bottom:310px;left:0;right:0;transform:translateY(425px);visibility:hidden;transition:transform 340ms cubic-bezier(.2,.8,.2,1),visibility 340ms;z-index:3}#med-motion .suggestions{display:flex;gap:8px;padding:0 11px 8px;overflow-x:auto;scrollbar-width:none;min-height:36px;align-items:center}#med-motion .suggestions button{flex-shrink:0;border:0;border-radius:9px;background:#fafafa;padding:7px 14px;font-size:15px;white-space:nowrap;min-height:32px;box-shadow:0 3px 18px #00000005;transition:opacity 140ms,transform 180ms}#med-motion .composer{margin:0 11px 7px;background:#fbfbfc;border-radius:21px;padding:11px}#med-motion .entry{min-height:45px;border:1px solid #dddde2;border-radius:27px;display:flex;align-items:center;background:white;padding:9px 10px;gap:6px}#med-motion #med-editor{flex:1;min-width:0;max-height:80px;overflow-y:auto;font-size:15px;line-height:24px;caret-color:#ff478b;overflow-wrap:anywhere}#med-motion #med-editor:empty:before{content:attr(data-placeholder);color:#c9c9cc;pointer-events:none}#med-motion #med-editor:focus-visible{outline:0}#med-motion #med-editor:empty:after{content:&quot;&quot;;position:absolute;width:2px;height:18px;background:#ff478b;left:32px;bottom:32px;animation:med-caret 1s step-end infinite}#med-motion .med-token{color:#ff478b;white-space:nowrap}#med-motion #med-send{width:25px;height:25px;border:0;border-radius:50%;background:#ff478b;color:white;font-size:21px;padding:0;flex-shrink:0}#med-motion [hidden]{display:none!important}#med-motion .keyboard{position:absolute;bottom:0;left:0;right:0;height:310px;background:#d1d4db;transform:translateY(100%);transition:transform 340ms cubic-bezier(.2,.8,.2,1);z-index:4;padding:0 3px}#med-motion .candidates{height:43px;display:flex;justify-content:space-around;align-items:center}#med-motion .candidates button{border:0;background:none;font-size:18px;min-width:32px;height:38px;color:#111}#med-motion .key-row{display:flex;justify-content:center;gap:5px;margin:4px 0 9px}#med-motion .key-row button{height:39px;flex:1;max-width:33px;border:0;border-radius:5px;background:white;box-shadow:0 1px 0 #989ba2;font-size:22px;color:#000;padding:0;transition:background 80ms}#med-motion .key-row button:active,#med-motion .key-row button.pressed{background:#aeb4bf}#med-motion .key-row:nth-child(2){padding:0 17px}#med-motion .key-row .special{background:#a9afb9;max-width:44px;font-size:18px}#med-motion .key-row:last-child{gap:5px}#med-motion .key-row:last-child button{max-width:none;font-size:16px}#med-motion .key-row .space{flex:2}#med-motion .keyboard-bottom{display:flex;justify-content:space-between;padding:14px 22px;font-size:27px;color:#666}#med-motion .device.editing .timeline{transform:translateY(-140px)}#med-motion .device.editing .insight{height:222px}#med-motion .device.editing .launcher{transform:translateY(400px);opacity:0;pointer-events:none}#med-motion .device.editing nav{transform:translateY(100%)}#med-motion .device.editing .picker,#med-motion .device.editing .keyboard{transform:translateY(0);visibility:visible}#med-motion .device.keyboard-hidden .keyboard{transform:translateY(100%)}#med-motion .device.keyboard-hidden .picker{transform:translateY(275px)}#med-motion .tap-indicator{position:absolute;width:30px;height:30px;border:2px solid #ff478b;background:#ff478b22;border-radius:50%;pointer-events:none;opacity:0;z-index:9}#med-motion .flying-token{position:absolute;z-index:8;color:#ff478b;background:#fff;border-radius:7px;padding:4px 8px;font-size:15px;pointer-events:none;transform-origin:left center}@keyframes med-caret{50%{opacity:0}}@media(prefers-reduced-motion:reduce){#med-motion *{transition:none!important;animation:none!important}}
+
+#med-motion .record-icon{display:block;width:40px;height:40px;object-fit:contain;flex-shrink:0}#med-motion .inline-record-icon{display:inline-block;width:32px;height:32px;object-fit:contain;vertical-align:-9px}#med-motion .icon-grid button{gap:0;min-height:56px}
+#med-motion .status{position:relative;z-index:2;background:#f2f2f6;padding:0 24px 0 32px}
+#med-motion .status-icons{display:flex;align-items:center;gap:5px}
+#med-motion .status-icons img{display:block;object-fit:contain;flex-shrink:0}
+#med-motion header{position:relative;z-index:2;background:#f2f2f6}
+#med-motion nav span{display:flex;flex:1;min-width:0;align-items:center;flex-direction:column;gap:3px}
+#med-motion nav img{width:26px;height:26px;object-fit:contain;display:block;flex-shrink:0}
+#med-motion nav small{line-height:16px}
+#med-motion .timeline-viewport{position:absolute;top:82px;bottom:78px;left:0;right:0;overflow:hidden}
+#med-motion .timeline{min-width:0}
+#med-motion article{min-width:0;max-width:100%;overflow-wrap:anywhere}
+#med-motion article p{white-space:normal;overflow-wrap:anywhere;line-height:1.55}
+#med-motion .weight{height:auto;min-height:83px}
+#med-motion .weight p{margin-top:12px}
+#med-motion .record p{white-space:normal;margin-top:12px}
+#med-motion .insight{height:auto!important;min-width:0;max-width:100%;padding:9px;overflow:hidden;transition:none}
+#med-motion .insight-summary{display:flex;align-items:center;gap:8px;min-width:0}
+#med-motion .insight-summary&gt;span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:24px}
+#med-motion .insight button{flex-shrink:0;background:none;border:0;padding:0;color:#527fb0;font-size:13px;line-height:24px}
+#med-motion .insight-details{display:grid;grid-template-rows:0fr;visibility:hidden;transition:grid-template-rows 340ms cubic-bezier(.2,.8,.2,1),visibility 340ms}
+#med-motion .insight-inner{min-height:0;overflow:hidden}
+#med-motion .insight-copy{line-height:25px;white-space:normal;overflow-wrap:anywhere}
+#med-motion .insight svg{width:100%;max-width:100%;height:auto;display:block;margin-top:8px;overflow:visible}
+#med-motion .dates{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:0;padding-left:27px;white-space:normal;font-size:11px;line-height:20px;text-align:center}
+#med-motion #insight-collapse{display:block;margin-top:7px}
+#med-motion .device.editing:not(.insight-closed) .insight-details,#med-motion .device.insight-expanded .insight-details{grid-template-rows:1fr;visibility:visible}
+#med-motion .device.editing:not(.insight-closed) .insight-summary,#med-motion .device.insight-expanded .insight-summary{display:none}
+#med-motion .entry{align-items:flex-end}
+#med-motion #med-editor{white-space:pre-wrap;max-height:96px}
+#med-motion .med-token{white-space:normal;overflow-wrap:anywhere}
+#med-motion #med-send{margin-bottom:0}
+
+#med-motion .picker{left:11px;right:11px;bottom:317px;background:#fbfbfc;border-radius:21px;padding:11px 0;box-shadow:0 -4px 24px #00000003}
+#med-motion .suggestions{min-height:39px;padding:0 11px 11px;gap:8px;align-items:center}
+#med-motion .suggestions button{background:#f3f3f5;border-radius:8px;padding:5px 13px;min-height:28px;font-size:15px;line-height:18px;box-shadow:none}
+#med-motion .composer{margin:0;padding:0 11px;background:transparent;border-radius:0}
+#med-motion .entry{padding:9px 11px;gap:0;align-items:flex-start;min-height:45px}
+#med-motion .entry-prefix{flex-shrink:0;font-size:16px;line-height:24px;color:#353535;user-select:none}
+#med-motion #med-editor{font-size:16px;min-height:24px;line-height:24px;caret-color:#ff478b}
+#med-motion #med-editor:empty:before{content:none}
+#med-motion #med-editor:empty:after{content:none}
+#med-motion #med-send{margin:1px 0 0 5px}
+#med-motion .device.keyboard-hidden .picker{transform:translateY(283px)}
+#med-motion .device.keyboard-hidden .timeline{transform:translateY(0)}
+
+
+#med-motion .suggestions{transition:min-height 200ms cubic-bezier(.2,.8,.2,1),padding-bottom 200ms cubic-bezier(.2,.8,.2,1),opacity 140ms}
+#med-motion .suggestions:empty{min-height:0;padding-bottom:0;opacity:0;pointer-events:none}
+#med-motion .launcher-input{display:flex;align-items:center;gap:8px;min-height:45px;border:1px solid #dedee2;border-radius:25px;padding:8px 10px;background:#fff}
+#med-motion .voice-input{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:25px;height:25px;border:1.5px solid #737373;border-radius:50%;color:#737373}
+#med-motion .voice-input svg{width:17px;height:17px}
+#med-motion .launcher-editor-slot{flex:1;min-width:0}
+#med-motion .launcher-editor-slot .entry{padding:0;border:0;border-radius:0;min-height:26px;background:transparent;align-items:center}
+#med-motion .launcher-editor-slot #med-editor{min-height:24px;max-height:72px;line-height:24px;overflow-wrap:anywhere}
+#med-motion .launcher-editor-slot #med-editor:empty:before{content:&#x27;记录生活点滴&#x27;;font-size:17px;color:#ccc}
+#med-motion .launcher-editor-slot #med-send{margin-top:0}
+
+#med-motion .composer .entry{min-height:45px;padding:9px 11px;align-items:center}
+#med-motion #med-editor{display:block;height:auto;min-height:24px;max-height:96px;margin:0;padding:0;line-height:24px;white-space:pre-wrap;overflow-wrap:anywhere}
+#med-motion .med-token{display:inline;line-height:inherit;vertical-align:baseline}
+#med-motion .composer #med-send{align-self:center;margin-top:0;margin-bottom:0}
+
+
+#med-motion .icon-grid button{display:grid;grid-template-rows:40px 20px;justify-items:center;align-items:center;align-content:start;gap:0;min-height:60px;line-height:20px}
+#med-motion .record-icon-placeholder{display:block;width:40px;height:40px}
+#med-motion .record-label{display:block;white-space:nowrap;line-height:20px}
+#med-motion .suggestions button{color:#323232;-webkit-text-fill-color:#323232;font-weight:400}
+
+&lt;/style&gt;
+&lt;script&gt;
+(()=&gt;{
+const root=document.getElementById(&#x27;med-motion&#x27;),q=s=&gt;root.querySelector(s),device=q(&#x27;.device&#x27;),editor=q(&#x27;#med-editor&#x27;),suggestions=q(&#x27;.suggestions&#x27;),status=q(&#x27;#motion-status&#x27;),play=q(&#x27;#play-motion&#x27;);
+const entry=q(&#x27;.entry&#x27;),launcherSlot=q(&#x27;.launcher-editor-slot&#x27;);
+function dockEntry(){launcherSlot.append(entry)}
+const medicines=[&#x27;布洛芬&#x27;,&#x27;999 感冒灵&#x27;,&#x27;阿莫西林&#x27;,&#x27;对乙酰&#x27;,&#x27;罗红霉素&#x27;];let usedMedicines=new Set(),numeric=false,run=0,playing=false,focusTimer,draftStarted=false;
+const reduced=matchMedia(&#x27;(prefers-reduced-motion: reduce)&#x27;).matches;
+function size(){const scale=q(&#x27;.device-wrap&#x27;).clientWidth/375;device.style.transform=`scale(${scale})`;q(&#x27;.device-wrap&#x27;).style.height=816*scale+&#x27;px&#x27;}new ResizeObserver(size).observe(q(&#x27;.device-wrap&#x27;));size();
+function renderTags(){const before=new Map([...suggestions.children].map(e=&gt;[e.textContent,e.getBoundingClientRect().left]));suggestions.replaceChildren();medicines.forEach(name=&gt;{const b=document.createElement(&#x27;button&#x27;);b.type=&#x27;button&#x27;;b.textContent=name;b.onpointerdown=e=&gt;e.preventDefault();b.onclick=()=&gt;{if(!playing)select(name)};suggestions.append(b);if(before.has(name)&amp;&amp;!reduced){const dx=(before.get(name)-b.getBoundingClientRect().left)/(q(&#x27;.device-wrap&#x27;).clientWidth/375);b.animate([{transform:`translateX(${dx}px)`},{transform:&#x27;translateX(0)&#x27;}],{duration:200,easing:&#x27;cubic-bezier(.2,.8,.2,1)&#x27;})}})}
+function endFocus(){editor.focus({preventScroll:true});const s=window.getSelection(),r=document.createRange();r.selectNodeContents(editor);r.collapse(false);s.removeAllRanges();s.addRange(r)}
+function normalizeEmptyEditor(){if(!editor.textContent.replace(/[\u200B\uFEFF]/g,&#x27;&#x27;).trim()){editor.replaceChildren();return true}return false}
+function update(){normalizeEmptyEditor();q(&#x27;#med-send&#x27;).hidden=!editor.textContent.replace(/^用药[：:]\s*/,&#x27;&#x27;).trim()}
+function open(resetEmpty=false){if(resetEmpty&amp;&amp;!editor.textContent.replace(/^用药[：:]\s*/,&#x27;&#x27;).trim()){usedMedicines.clear();editor.replaceChildren();draftStarted=false;numeric=false;renderTags();keys()}q(&#x27;.composer&#x27;).append(entry);if(!draftStarted){editor.textContent=&#x27;用药：&#x27;;draftStarted=true;update()}device.classList.remove(&#x27;insight-closed&#x27;);device.classList.add(&#x27;editing&#x27;);device.classList.remove(&#x27;keyboard-hidden&#x27;);q(&#x27;.picker&#x27;).setAttribute(&#x27;aria-hidden&#x27;,&#x27;false&#x27;);status.textContent=&#x27;选择药品，继续输入用量&#x27;;clearTimeout(focusTimer);focusTimer=setTimeout(endFocus,reduced?0:350)}
+function select(name){normalizeEmptyEditor();const source=[...suggestions.children].find(e=&gt;e.textContent===name),from=source?.getBoundingClientRect();endFocus();if(editor.textContent&amp;&amp;!/[：:\s]$/.test(editor.textContent))editor.append(document.createTextNode(&#x27; &#x27;));const token=document.createElement(&#x27;span&#x27;);token.className=&#x27;med-token&#x27;;token.contentEditable=&#x27;false&#x27;;token.dataset.name=name;token.textContent=name;editor.append(token);endFocus();update();status.textContent=name+&#x27;已加入输入框&#x27;;if(from&amp;&amp;!reduced){const to=token.getBoundingClientRect(),box=device.getBoundingClientRect(),scale=box.width/375,fly=document.createElement(&#x27;span&#x27;);fly.className=&#x27;flying-token&#x27;;fly.textContent=name;fly.style.left=(from.left-box.left)/scale+&#x27;px&#x27;;fly.style.top=(from.top-box.top)/scale+&#x27;px&#x27;;device.append(fly);token.style.opacity=&#x27;0&#x27;;const a=fly.animate([{transform:&#x27;translate(0,0)&#x27;,opacity:1},{transform:`translate(${(to.left-from.left)/scale}px,${(to.top-from.top)/scale}px)`,opacity:.7}],{duration:220,easing:&#x27;cubic-bezier(.2,.8,.2,1)&#x27;});a.onfinish=()=&gt;{fly.remove();token.style.opacity=&#x27;1&#x27;}}}
+function insert(t){normalizeEmptyEditor();endFocus();editor.append(document.createTextNode(t));endFocus();update()}
+function erase(){endFocus();const n=editor.lastChild;if(!n)return;if(n.nodeType===3){n.textContent=n.textContent.slice(0,-1);if(!n.textContent)n.remove()}else n.remove();update()}
+function keys(){const rows=numeric?[&#x27;1234567890&#x27;,&#x27;-/:;()¥&amp;@&#x27;,&#x27;x.,?!片&#x27;]:[&#x27;qwertyuiop&#x27;,&#x27;asdfghjkl&#x27;,&#x27;zxcvbnm&#x27;];q(&#x27;.keys&#x27;).replaceChildren();rows.forEach((row,i)=&gt;{const el=document.createElement(&#x27;div&#x27;);el.className=&#x27;key-row&#x27;;if(i===2)add(el,&#x27;⇧&#x27;,()=&gt;{numeric=!numeric;keys()},&#x27;special&#x27;);[...row].forEach(c=&gt;add(el,c,()=&gt;insert(c)));if(i===2)add(el,&#x27;⌫&#x27;,erase,&#x27;special&#x27;);q(&#x27;.keys&#x27;).append(el)});const row=document.createElement(&#x27;div&#x27;);row.className=&#x27;key-row&#x27;;add(row,numeric?&#x27;ABC&#x27;:&#x27;123&#x27;,()=&gt;{numeric=!numeric;keys()},&#x27;special&#x27;);add(row,&#x27;空格&#x27;,()=&gt;insert(&#x27; &#x27;),&#x27;space&#x27;);add(row,&#x27;换行&#x27;,()=&gt;insert(&#x27;\n&#x27;),&#x27;special&#x27;);q(&#x27;.keys&#x27;).append(row)}
+function add(el,label,fn,cls=&#x27;&#x27;){const b=document.createElement(&#x27;button&#x27;);b.textContent=label;b.type=&#x27;button&#x27;;b.className=cls;b.onpointerdown=e=&gt;e.preventDefault();b.onclick=()=&gt;{if(!playing)fn()};el.append(b)}
+function reset(){clearTimeout(focusTimer);draftStarted=false;run++;playing=false;play.disabled=false;play.textContent=&#x27;播放动效&#x27;;usedMedicines.clear();editor.replaceChildren();numeric=false;device.classList.remove(&#x27;editing&#x27;,&#x27;keyboard-hidden&#x27;,&#x27;insight-expanded&#x27;,&#x27;insight-closed&#x27;);q(&#x27;.picker&#x27;).setAttribute(&#x27;aria-hidden&#x27;,&#x27;true&#x27;);renderTags();keys();update();editor.blur();dockEntry();status.textContent=&#x27;点击用药，开始记录&#x27;}
+const wait=ms=&gt;new Promise(r=&gt;setTimeout(r,ms));
+async function tap(el){if(!el||reduced)return;const a=el.getBoundingClientRect(),b=device.getBoundingClientRect(),s=b.width/375,t=q(&#x27;.tap-indicator&#x27;);t.style.left=(a.left-b.left+a.width/2)/s-15+&#x27;px&#x27;;t.style.top=(a.top-b.top+a.height/2)/s-15+&#x27;px&#x27;;await t.animate([{opacity:0,transform:&#x27;scale(1.4)&#x27;},{opacity:1,transform:&#x27;scale(.8)&#x27;,offset:.45},{opacity:0,transform:&#x27;scale(1.15)&#x27;}],{duration:330}).finished}
+async function demo(){reset();playing=true;play.disabled=true;play.textContent=&#x27;演示中…&#x27;;const id=run;const pause=async ms=&gt;{await wait(ms);if(id!==run)throw Error(&#x27;cancel&#x27;)};try{await pause(350);await tap(q(&#x27;#med-open&#x27;));await pause(20);open();await pause(900);await tap([...suggestions.children][0]);await pause(20);select(&#x27;布洛芬&#x27;);await pause(650);status.textContent=&#x27;输入用量 x3片&#x27;;for(const c of [&#x27;x&#x27;,&#x27;3&#x27;,&#x27;片&#x27;]){if(c===&#x27;3&#x27;){numeric=true;keys()}await tap([...q(&#x27;.keys&#x27;).querySelectorAll(&#x27;button&#x27;)].find(e=&gt;e.textContent===c));await pause(30);insert(c);await pause(300)}await pause(650);await tap([...suggestions.children].find(e=&gt;e.textContent===&#x27;999 感冒灵&#x27;));await pause(20);select(&#x27;999 感冒灵&#x27;);await pause(900);await tap(q(&#x27;header&#x27;));await pause(20);hideKeyboard();await pause(450);status.textContent=&#x27;已返回记录面板，草稿保留在输入框中&#x27;;}catch(e){}finally{if(id===run){playing=false;play.disabled=false;play.textContent=&#x27;重播动效&#x27;}}}
+q(&#x27;#med-open&#x27;).onclick=()=&gt;{if(!playing)open(true)};q(&#x27;#reset-motion&#x27;).onclick=reset;play.onclick=demo;editor.addEventListener(&#x27;input&#x27;,update);editor.addEventListener(&#x27;focus&#x27;,()=&gt;{if(!device.classList.contains(&#x27;editing&#x27;))open();else device.classList.remove(&#x27;keyboard-hidden&#x27;)});q(&#x27;#hide-key&#x27;).onclick=()=&gt;{if(!playing){device.classList.add(&#x27;keyboard-hidden&#x27;);editor.blur()}};root.querySelectorAll(&#x27;[data-insert]&#x27;).forEach(b=&gt;{b.onpointerdown=e=&gt;e.preventDefault();b.onclick=()=&gt;{if(!playing)insert(b.dataset.insert)}});q(&#x27;#med-send&#x27;).onpointerdown=e=&gt;e.preventDefault();q(&#x27;#med-send&#x27;).onclick=()=&gt;{if(playing)return;const value=editor.textContent.trim();if(!value.replace(/^用药[：:]\s*/,&#x27;&#x27;).trim())return;reset();const a=document.createElement(&#x27;article&#x27;),t=document.createElement(&#x27;time&#x27;),p=document.createElement(&#x27;p&#x27;);t.textContent=&#x27;刚刚&#x27;;p.textContent=&#x27;💊 &#x27;+value;a.append(t,p);q(&#x27;.timeline&#x27;).insertBefore(a,q(&#x27;.weight&#x27;));status.textContent=&#x27;已保存：&#x27;+value};q(&#x27;#insight-expand&#x27;).onclick=()=&gt;{device.classList.remove(&#x27;insight-closed&#x27;);device.classList.add(&#x27;insight-expanded&#x27;);q(&#x27;#insight-expand&#x27;).setAttribute(&#x27;aria-expanded&#x27;,&#x27;true&#x27;)};q(&#x27;#insight-collapse&#x27;).onclick=()=&gt;{device.classList.remove(&#x27;insight-expanded&#x27;);device.classList.add(&#x27;insight-closed&#x27;);q(&#x27;#insight-expand&#x27;).setAttribute(&#x27;aria-expanded&#x27;,&#x27;false&#x27;)};function hideKeyboard(){
+ if(!device.classList.contains(&#x27;editing&#x27;))return;
+ clearTimeout(focusTimer);
+ editor.blur();
+ device.classList.remove(&#x27;editing&#x27;,&#x27;keyboard-hidden&#x27;,&#x27;insight-expanded&#x27;,&#x27;insight-closed&#x27;);
+ q(&#x27;.picker&#x27;).setAttribute(&#x27;aria-hidden&#x27;,&#x27;true&#x27;);
+ dockEntry();
+ status.textContent=&#x27;键盘已收起，草稿保留在输入框中&#x27;;
+}
+q(&#x27;#hide-key&#x27;).onclick=()=&gt;{if(!playing)hideKeyboard()};
+device.addEventListener(&#x27;pointerdown&#x27;,event=&gt;{
+ if(playing||!device.classList.contains(&#x27;editing&#x27;))return;
+ if(event.target.closest(&#x27;.picker,.keyboard,button,a,input,textarea,select,[contenteditable=&quot;true&quot;]&#x27;))return;
+ hideKeyboard();
+});
+q(&#x27;.entry&#x27;).addEventListener(&#x27;click&#x27;,event=&gt;{
+ if(playing||event.target.closest(&#x27;#med-send&#x27;)||event.target===editor||editor.contains(event.target))return;
+ endFocus();
+});
+editor.addEventListener(&#x27;keydown&#x27;,event=&gt;{
+ if(event.key===&#x27;Escape&#x27;){event.preventDefault();hideKeyboard()}
+});
+
+q(&#x27;.launcher-input&#x27;).addEventListener(&#x27;click&#x27;,event=&gt;{if(!playing&amp;&amp;!event.target.closest(&#x27;#med-send&#x27;)&amp;&amp;!device.classList.contains(&#x27;editing&#x27;))open()});
+dockEntry();renderTags();keys();
+})();
+&lt;/script&gt;
+
+&lt;script src=&quot;https://unpkg.com/@floating-ui/core@1.7.3/dist/floating-ui.core.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://unpkg.com/@floating-ui/dom@1.7.4/dist/floating-ui.dom.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  if (window.FloatingUIDOM == null) {
+    return;
+  }
+  const { autoUpdate, computePosition, flip, offset, shift, size } =
+    window.FloatingUIDOM;
+  const tooltipPlacements = new Set([&quot;top&quot;, &quot;right&quot;, &quot;bottom&quot;, &quot;left&quot;]);
+  const tooltipId = `codex-visualization-tooltip-${
+    window.crypto?.randomUUID?.() ?? Date.now().toString(36)
+  }`;
+  const tooltipGap = 5;
+  const hoverDelay = 700;
+  const skipDelay = 300;
+  let activeTrigger = null;
+  let pendingTrigger = null;
+  let tooltip = null;
+  let openTimeout = null;
+  let autoUpdateCleanup = null;
+  let positionRequest = 0;
+  let skipDelayUntil = 0;
+  let lastPointerWasTouch = false;
+  let pinnedByTouch = false;
+
+  const getTrigger = (event) =&gt; {
+    for (const target of event.composedPath()) {
+      if (target?.nodeType === Node.ELEMENT_NODE) {
+        const trigger = target.closest(&quot;[data-tooltip]&quot;);
+        if (trigger) return trigger;
+      }
+    }
+    return null;
+  };
+  const containsTarget = (trigger, target) =&gt;
+    target?.nodeType != null &amp;&amp; trigger.contains(target);
+  const getContent = (trigger) =&gt;
+    trigger.getAttribute(&quot;data-tooltip&quot;)?.trim() ?? &quot;&quot;;
+  const getPlacement = (trigger) =&gt; {
+    const placement = trigger.getAttribute(&quot;data-tooltip-placement&quot;);
+    return tooltipPlacements.has(placement) ? placement : &quot;top&quot;;
+  };
+  const getTooltip = () =&gt; {
+    if (tooltip == null) {
+      tooltip = document.createElement(&quot;div&quot;);
+      tooltip.id = tooltipId;
+      tooltip.className = &quot;tooltip&quot;;
+      tooltip.setAttribute(&quot;role&quot;, &quot;tooltip&quot;);
+    }
+    return tooltip;
+  };
+  const setDescribedBy = (trigger, described) =&gt; {
+    const ids = new Set(
+      (trigger.getAttribute(&quot;aria-describedby&quot;) ?? &quot;&quot;)
+        .split(/\s+/)
+        .filter(Boolean),
+    );
+    if (described) {
+      ids.add(tooltipId);
+    } else {
+      ids.delete(tooltipId);
+    }
+    if (ids.size === 0) {
+      trigger.removeAttribute(&quot;aria-describedby&quot;);
+    } else {
+      trigger.setAttribute(&quot;aria-describedby&quot;, [...ids].join(&quot; &quot;));
+    }
+  };
+  const clearOpenTimeout = () =&gt; {
+    if (openTimeout != null) {
+      window.clearTimeout(openTimeout);
+      openTimeout = null;
+    }
+    pendingTrigger = null;
+  };
+  const closeTooltip = (activateSkipDelay = true) =&gt; {
+    clearOpenTimeout();
+    pinnedByTouch = false;
+    positionRequest += 1;
+    autoUpdateCleanup?.();
+    autoUpdateCleanup = null;
+    if (activeTrigger == null) {
+      return;
+    }
+    setDescribedBy(activeTrigger, false);
+    activeTrigger = null;
+    tooltip?.remove();
+    if (activateSkipDelay) {
+      skipDelayUntil = Date.now() + skipDelay;
+    }
+  };
+  const updatePosition = (trigger, floating) =&gt; {
+    const request = ++positionRequest;
+    void computePosition(trigger, floating, {
+      middleware: [
+        offset(tooltipGap),
+        flip({ padding: tooltipGap }),
+        shift({ padding: tooltipGap }),
+        size({
+          padding: tooltipGap,
+          apply({ availableHeight, availableWidth, elements }) {
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-width&quot;,
+              `${Math.max(0, availableWidth)}px`,
+            );
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-height&quot;,
+              `${Math.max(0, availableHeight)}px`,
+            );
+          },
+        }),
+      ],
+      placement: getPlacement(trigger),
+      strategy: &quot;fixed&quot;,
+    })
+      .then(({ x, y }) =&gt; {
+        if (activeTrigger !== trigger || request !== positionRequest) {
+          return;
+        }
+        const scale = window.devicePixelRatio || 1;
+        floating.style.transform = `translate(${Math.round(x * scale) / scale}px, ${Math.round(y * scale) / scale}px)`;
+        floating.style.visibility = &quot;visible&quot;;
+      })
+      .catch(() =&gt; {
+        if (activeTrigger === trigger &amp;&amp; request === positionRequest) {
+          closeTooltip(false);
+        }
+      });
+  };
+  const openTooltip = (trigger) =&gt; {
+    const content = getContent(trigger);
+    if (!trigger.isConnected || content.length === 0) {
+      return;
+    }
+    clearOpenTimeout();
+    if (activeTrigger === trigger) {
+      return;
+    }
+    closeTooltip();
+    const floating = getTooltip();
+    floating.textContent = content;
+    floating.style.visibility = &quot;hidden&quot;;
+    floating.style.transform = &quot;translate(0, 0)&quot;;
+    document.body.appendChild(floating);
+    activeTrigger = trigger;
+    setDescribedBy(trigger, true);
+    autoUpdateCleanup = autoUpdate(trigger, floating, () =&gt; {
+      updatePosition(trigger, floating);
+    });
+  };
+  const requestOpen = (trigger, immediate = false) =&gt; {
+    if (
+      getContent(trigger).length === 0 ||
+      activeTrigger === trigger ||
+      pendingTrigger === trigger
+    ) {
+      return;
+    }
+    clearOpenTimeout();
+    pendingTrigger = trigger;
+    const delay =
+      immediate || activeTrigger != null || Date.now() &lt; skipDelayUntil
+        ? 0
+        : hoverDelay;
+    if (delay === 0) {
+      openTooltip(trigger);
+      return;
+    }
+    openTimeout = window.setTimeout(() =&gt; {
+      openTimeout = null;
+      pendingTrigger = null;
+      openTooltip(trigger);
+    }, delay);
+  };
+  const handlePointerOpen = (event) =&gt; {
+    if (event.pointerType === &quot;touch&quot;) {
+      return;
+    }
+    const trigger = getTrigger(event);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    requestOpen(trigger);
+  };
+  const handlePointer = (event) =&gt; {
+    lastPointerWasTouch =
+      event.type === &quot;pointerdown&quot; &amp;&amp; event.pointerType === &quot;touch&quot;;
+  };
+  const handleTouchClick = (event) =&gt; {
+    const isTouch = event.pointerType === &quot;touch&quot; || lastPointerWasTouch;
+    lastPointerWasTouch = false;
+    if (!isTouch || event.detail === 0) {
+      return;
+    }
+    const trigger = getTrigger(event);
+    if (
+      trigger == null ||
+      !trigger.isConnected ||
+      getContent(trigger).length === 0 ||
+      (pinnedByTouch &amp;&amp; activeTrigger === trigger)
+    ) {
+      if (pinnedByTouch) {
+        closeTooltip();
+      }
+      return;
+    }
+    openTooltip(trigger);
+    pinnedByTouch = activeTrigger === trigger;
+    window.setTimeout(() =&gt; {
+      if (activeTrigger === trigger &amp;&amp; !trigger.isConnected) {
+        closeTooltip(false);
+      }
+    }, 0);
+  };
+  const handleLeave = (event) =&gt; {
+    if (pinnedByTouch) {
+      return;
+    }
+    const trigger = getTrigger(event);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handleFocusIn = (event) =&gt; {
+    const trigger = getTrigger(event);
+    if (trigger?.matches(&quot;:focus-visible&quot;)) {
+      requestOpen(trigger, true);
+    }
+  };
+  const handleKeyDown = (event) =&gt; {
+    if (event.key === &quot;Escape&quot;) {
+      closeTooltip();
+    }
+  };
+  const handleContextMenu = (event) =&gt; {
+    lastPointerWasTouch = false;
+    const trigger = getTrigger(event);
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handlers = {
+    pointerover: handlePointerOpen,
+    pointerdown: handlePointer,
+    pointercancel: handlePointer,
+    click: handleTouchClick,
+    pointerout: handleLeave,
+    focusin: handleFocusIn,
+    focusout: handleLeave,
+    keydown: handleKeyDown,
+    contextmenu: handleContextMenu,
+  };
+  const roots = new Map();
+  const handledEvents = new WeakSet();
+  const handleEvent = (event) =&gt; {
+    if (handledEvents.has(event)) return;
+    handledEvents.add(event);
+    handlers[event.type](event);
+  };
+  const discoverRoots = (node) =&gt; {
+    if (node.shadowRoot) listen(node.shadowRoot);
+    for (const element of node.querySelectorAll(&quot;*&quot;)) {
+      if (element.shadowRoot) listen(element.shadowRoot);
+    }
+  };
+  const listen = (root) =&gt; {
+    if (roots.has(root)) return;
+    for (const type of Object.keys(handlers)) root.addEventListener(type, handleEvent);
+    const observer = new window.MutationObserver((records) =&gt; {
+      for (const { addedNodes } of records) {
+        for (const node of addedNodes) {
+          if (node.nodeType === Node.ELEMENT_NODE) discoverRoots(node);
+        }
+      }
+      for (const [root, cleanup] of roots) {
+        if (root.host &amp;&amp; !root.host.isConnected) {
+          cleanup();
+          roots.delete(root);
+        }
+      }
+      if (activeTrigger &amp;&amp; !activeTrigger.isConnected) closeTooltip(false);
+    });
+    observer.observe(root, { childList: true, subtree: true });
+    roots.set(root, () =&gt; {
+      observer.disconnect();
+      for (const type of Object.keys(handlers)) root.removeEventListener(type, handleEvent);
+    });
+    discoverRoots(root);
+  };
+  const destroy = () =&gt; {
+    closeTooltip(false);
+    lastPointerWasTouch = false;
+    for (const cleanup of roots.values()) cleanup();
+    roots.clear();
+    tooltip = null;
+  };
+
+  // Events between children of one shadow root never reach the document.
+  listen(document);
+  window.addEventListener(&quot;pagehide&quot;, destroy, { once: true });
+})();
+&lt;/script&gt;
+&lt;script id=&quot;codex-visualization-tabs&quot;&gt;
+(() =&gt; {
+  const selector = &#x27;.nav[role=&quot;tablist&quot;] [role=&quot;tab&quot;]&#x27;;
+  const disabled = &#x27;:disabled,[aria-disabled=&quot;true&quot;]&#x27;;
+  const selectTab = (selected) =&gt; {
+    const panelId = selected.getAttribute(&quot;aria-controls&quot;);
+    for (const tab of selected.closest(&#x27;[role=&quot;tablist&quot;]&#x27;).querySelectorAll(&#x27;[role=&quot;tab&quot;]&#x27;)) {
+      const active = tab === selected;
+      tab.classList.toggle(&quot;active&quot;, active);
+      tab.setAttribute(&quot;aria-selected&quot;, String(active));
+      const id = tab.getAttribute(&quot;aria-controls&quot;);
+      const panel = id &amp;&amp; document.getElementById(id);
+      if (panel != null) {
+        panel.hidden = id !== panelId;
+        if (!panel.hidden &amp;&amp; selected.id) {
+          panel.setAttribute(&quot;aria-labelledby&quot;, selected.id);
+        }
+      }
+    }
+  };
+  const interact = (event) =&gt; {
+    const tab = event.target?.closest?.(selector);
+    if (event.defaultPrevented || tab == null || tab.matches(disabled)) {
+      return;
+    }
+    if (event.type === &quot;click&quot;) {
+      selectTab(tab);
+      return;
+    }
+    const tabs = Array.from(
+      tab.closest(&#x27;[role=&quot;tablist&quot;]&#x27;).querySelectorAll(&#x27;[role=&quot;tab&quot;]&#x27;),
+    ).filter((candidate) =&gt; !candidate.matches(disabled));
+    const current = tabs.indexOf(tab);
+    let next;
+    if (event.key === &quot;ArrowRight&quot; || event.key === &quot;ArrowDown&quot;) {
+      next = (current + 1) % tabs.length;
+    } else if (event.key === &quot;ArrowLeft&quot; || event.key === &quot;ArrowUp&quot;) {
+      next = (current + tabs.length - 1) % tabs.length;
+    } else if (event.key === &quot;Home&quot;) {
+      next = 0;
+    } else if (event.key === &quot;End&quot;) {
+      next = tabs.length - 1;
+    } else {
+      return;
+    }
+    event.preventDefault();
+    tabs[next].focus();
+    selectTab(tabs[next]);
+  };
+
+  for (const list of document.querySelectorAll(&#x27;.nav[role=&quot;tablist&quot;]&#x27;)) {
+    const selected =
+      list.querySelector(&#x27;[role=&quot;tab&quot;][aria-selected=&quot;true&quot;]&#x27;) ??
+      list.querySelector(&#x27;[role=&quot;tab&quot;].active&#x27;) ??
+      list.querySelector(&#x27;[role=&quot;tab&quot;]&#x27;);
+    if (selected != null) {
+      selectTab(selected);
+    }
+  }
+  document.addEventListener(&quot;click&quot;, interact);
+  document.addEventListener(&quot;keydown&quot;, interact);
+  window.addEventListener(&quot;pagehide&quot;, () =&gt; {
+    document.removeEventListener(&quot;click&quot;, interact);
+    document.removeEventListener(&quot;keydown&quot;, interact);
+  }, { once: true });
+})();
+&lt;/script&gt;
+&lt;script id=&quot;codex-visualization-carousel&quot;&gt;
+  (() =&gt; {
+    for (const root of document.querySelectorAll(&quot;.viz-carousel&quot;)) {
+      const panels = Array.from(
+        root.querySelectorAll(&quot;:scope &gt; [data-variant]&quot;),
+      );
+      if (panels.length === 0) {
+        continue;
+      }
+      root.setAttribute(&quot;role&quot;, &quot;group&quot;);
+      panels.forEach((panel, index) =&gt; {
+        panel.hidden = index !== 0;
+        panel.setAttribute(&quot;role&quot;, &quot;group&quot;);
+        if (!panel.hasAttribute(&quot;aria-label&quot;)) {
+          panel.setAttribute(&quot;aria-label&quot;, panel.dataset.variant);
+        }
+      });
+      root.dataset.activeVariant = panels[0].dataset.variant;
+      if (panels.length === 1) {
+        continue;
+      }
+
+      const controls = document.createElement(&quot;div&quot;);
+      controls.className = &quot;viz-carousel-controls&quot;;
+      // Portable copy of the settings dropdown&#x27;s legacy glyph; no 14px icon-package preset matches it.
+      // https://github.com/openai/openai/blob/master/codex/codex-apps/webview/src/icons/chevron.svg
+      controls.innerHTML = `
+      &lt;button type=&quot;button&quot; class=&quot;viz-carousel-previous cursor-interaction&quot;&gt;&lt;i data-lucide=&quot;chevron-left&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+      &lt;details class=&quot;viz-carousel-picker&quot;&gt;
+        &lt;summary class=&quot;cursor-interaction&quot;&gt;
+          &lt;span class=&quot;viz-carousel-count tabular-nums&quot;&gt;&lt;/span&gt;
+          &lt;span class=&quot;viz-carousel-name&quot;&gt;&lt;/span&gt;
+          &lt;svg class=&quot;viz-carousel-caret&quot; width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 20 21&quot; fill=&quot;none&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;&gt;
+            &lt;path d=&quot;M15.2793 7.71101C15.539 7.45131 15.961 7.45131 16.2207 7.71101C16.4804 7.97071 16.4804 8.39272 16.2207 8.65242L10.4707 14.4024C10.211 14.6621 9.78902 14.6621 9.52932 14.4024L3.77932 8.65242L3.69436 8.54792C3.52385 8.28979 3.55205 7.93828 3.77932 7.71101C4.00659 7.48374 4.3581 7.45554 4.61623 7.62605L4.72073 7.71101L10 12.9903L15.2793 7.71101Z&quot; fill=&quot;currentColor&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;0.6&quot; /&gt;
+          &lt;/svg&gt;
+        &lt;/summary&gt;
+        &lt;div class=&quot;viz-carousel-options&quot;&gt;&lt;/div&gt;
+      &lt;/details&gt;
+      &lt;button type=&quot;button&quot; class=&quot;viz-carousel-next cursor-interaction&quot;&gt;&lt;i data-lucide=&quot;chevron-right&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;`;
+      const previous = controls.querySelector(&quot;.viz-carousel-previous&quot;);
+      const next = controls.querySelector(&quot;.viz-carousel-next&quot;);
+      const picker = controls.querySelector(&quot;.viz-carousel-picker&quot;);
+      const summary = picker.querySelector(&quot;summary&quot;);
+      const count = controls.querySelector(&quot;.viz-carousel-count&quot;);
+      const name = controls.querySelector(&quot;.viz-carousel-name&quot;);
+      const options = controls.querySelector(&quot;.viz-carousel-options&quot;);
+      const status = document.createElement(&quot;span&quot;);
+      status.className = &quot;sr-only&quot;;
+      status.setAttribute(&quot;role&quot;, &quot;status&quot;);
+      status.setAttribute(&quot;aria-live&quot;, &quot;polite&quot;);
+      status.setAttribute(&quot;aria-atomic&quot;, &quot;true&quot;);
+      previous.setAttribute(
+        &quot;aria-label&quot;,
+        root.dataset.previousLabel ?? &quot;Previous variant&quot;,
+      );
+      next.setAttribute(&quot;aria-label&quot;, root.dataset.nextLabel ?? &quot;Next variant&quot;);
+
+      let active = 0;
+      let mousePointerId = null;
+      let summaryPointerHandled = false;
+      summary.addEventListener(&quot;pointerdown&quot;, (event) =&gt; {
+        summaryPointerHandled =
+          event.pointerType === &quot;mouse&quot; &amp;&amp; event.button === 0 &amp;&amp; !event.ctrlKey;
+        if (!summaryPointerHandled) {
+          return;
+        }
+        event.preventDefault();
+        summary.focus({ preventScroll: true });
+        picker.open = !picker.open;
+        mousePointerId = picker.open ? event.pointerId : null;
+      });
+      summary.addEventListener(&quot;click&quot;, (event) =&gt; {
+        if (summaryPointerHandled &amp;&amp; event.detail &gt; 0) {
+          event.preventDefault();
+        }
+      });
+      const choices = panels.map((panel, index) =&gt; {
+        const choice = document.createElement(&quot;button&quot;);
+        choice.type = &quot;button&quot;;
+        choice.className = &quot;cursor-interaction&quot;;
+        choice.textContent = panel.dataset.variant;
+        choice.addEventListener(&quot;click&quot;, () =&gt; {
+          select(index);
+          summary.focus();
+        });
+        choice.addEventListener(&quot;pointerup&quot;, (event) =&gt; {
+          if (
+            picker.open &amp;&amp;
+            event.pointerType === &quot;mouse&quot; &amp;&amp;
+            event.button === 0 &amp;&amp;
+            event.pointerId === mousePointerId
+          ) {
+            choice.click();
+          }
+        });
+        options.appendChild(choice);
+        return choice;
+      });
+      const select = (index) =&gt; {
+        const changed = active !== index;
+        active = index;
+        panels.forEach((panel, position) =&gt; {
+          panel.hidden = position !== active;
+          choices[position].setAttribute(
+            &quot;aria-current&quot;,
+            String(position === active),
+          );
+        });
+        root.dataset.activeVariant = panels[active].dataset.variant;
+        count.textContent = `${active + 1} / ${panels.length}`;
+        name.textContent = panels[active].dataset.variant;
+        picker.open = false;
+        mousePointerId = null;
+        if (changed) {
+          status.textContent = `${count.textContent}: ${name.textContent}`;
+        }
+      };
+      previous.addEventListener(&quot;click&quot;, () =&gt;
+        select((active + panels.length - 1) % panels.length),
+      );
+      next.addEventListener(&quot;click&quot;, () =&gt;
+        select((active + 1) % panels.length),
+      );
+      picker.addEventListener(&quot;keydown&quot;, (event) =&gt; {
+        if (event.key === &quot;Escape&quot; &amp;&amp; picker.open) {
+          event.preventDefault();
+          picker.open = false;
+          mousePointerId = null;
+          summary.focus();
+          return;
+        }
+        if (event.altKey || event.ctrlKey || event.metaKey) {
+          return;
+        }
+        const index = choices.indexOf(document.activeElement);
+        let nextIndex;
+        if (event.key === &quot;ArrowDown&quot;) {
+          nextIndex = index &lt; 0 ? active : (index + 1) % choices.length;
+        } else if (event.key === &quot;ArrowUp&quot;) {
+          nextIndex = index &lt; 0 ? active : (index + choices.length - 1) % choices.length;
+        } else if (picker.open &amp;&amp; event.key === &quot;Home&quot;) {
+          nextIndex = 0;
+        } else if (picker.open &amp;&amp; event.key === &quot;End&quot;) {
+          nextIndex = choices.length - 1;
+        } else {
+          return;
+        }
+        event.preventDefault();
+        picker.open = true;
+        choices[nextIndex].focus();
+      });
+      picker.addEventListener(&quot;focusout&quot;, (event) =&gt; {
+        if (!picker.contains(event.relatedTarget)) {
+          picker.open = false;
+          mousePointerId = null;
+        }
+      });
+      const dismiss = (event) =&gt; {
+        if (!summary.contains(event.target)) {
+          mousePointerId = null;
+        }
+        if (!picker.contains(event.target)) {
+          picker.open = false;
+        }
+      };
+      const endPointerSelection = () =&gt; {
+        mousePointerId = null;
+      };
+      const sizePicker = () =&gt; {
+        root.style.setProperty(
+          &quot;--viz-carousel-picker-height&quot;,
+          `${picker.open ? options.offsetHeight : 0}px`,
+        );
+      };
+      picker.addEventListener(&quot;toggle&quot;, sizePicker);
+      window.addEventListener(&quot;resize&quot;, sizePicker);
+      document.addEventListener(&quot;pointerdown&quot;, dismiss);
+      document.addEventListener(&quot;pointerup&quot;, endPointerSelection);
+      document.addEventListener(&quot;pointercancel&quot;, endPointerSelection);
+      window.addEventListener(&quot;blur&quot;, endPointerSelection);
+      window.addEventListener(
+        &quot;pagehide&quot;,
+        () =&gt; {
+          document.removeEventListener(&quot;pointerdown&quot;, dismiss);
+          document.removeEventListener(&quot;pointerup&quot;, endPointerSelection);
+          document.removeEventListener(&quot;pointercancel&quot;, endPointerSelection);
+          window.removeEventListener(&quot;blur&quot;, endPointerSelection);
+          window.removeEventListener(&quot;resize&quot;, sizePicker);
+        },
+        { once: true },
+      );
+      root.append(controls, status);
+      select(0);
+    }
+  })();
+&lt;/script&gt;
+&lt;script id=&quot;codex-visualization-lucide&quot; async src=&quot;https://unpkg.com/lucide@1.17.0/dist/umd/lucide.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  const initialize = () =&gt; {
+    globalThis.lucide?.createIcons({ attrs: { width: 16, height: 16 } });
+  };
+  if (globalThis.lucide != null) {
+    initialize();
+    return;
+  }
+  document
+    .getElementById(&quot;codex-visualization-lucide&quot;)
+    ?.addEventListener(&quot;load&quot;, initialize, { once: true });
+})();
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe>
+<script>(() => {
+  const frame = document.getElementById("codex-visualization");
+  if (!(frame instanceof HTMLIFrameElement)) {
+    return;
+  }
+  let viewportHeight = globalThis.innerHeight;
+  const storageKey = `codex:visualization-widget-state-v2:${JSON.stringify([
+    globalThis.location.pathname,
+    globalThis.location.search,
+  ])}`;
+  const parseState = (serializedState) => {
+    if (
+      typeof serializedState !== "string" ||
+      new TextEncoder().encode(serializedState).length > 16 * 1024
+    ) {
+      throw new TypeError(
+        "Widget state must be a JSON object of at most 16 KiB",
+      );
+    }
+    /** @type {unknown} */
+    const state = JSON.parse(serializedState);
+    if (
+      state == null ||
+      typeof state !== "object" ||
+      Array.isArray(state) ||
+      ("imageIds" in state &&
+        (!Array.isArray(state.imageIds) || state.imageIds.length > 0))
+    ) {
+      throw new TypeError("Widget state must be a JSON object");
+    }
+    const storedState = { modelContent: null, privateContent: null, ...state };
+    const canonicalState = JSON.stringify(
+      storedState,
+      (_key, /** @type {unknown} */ value) => {
+        if (typeof value === "number" && !Number.isFinite(value)) {
+          throw new TypeError("Widget state must contain finite numbers");
+        }
+        return value;
+      },
+    );
+    if (new TextEncoder().encode(canonicalState).length > 16 * 1024) {
+      throw new TypeError(
+        "Widget state must be a JSON object of at most 16 KiB",
+      );
+    }
+    return storedState;
+  };
+  let storage = null;
+  let state = null;
+  try {
+    const localStorage = globalThis.localStorage;
+    const probeKey = `${storageKey}:probe`;
+    localStorage.setItem(probeKey, "1");
+    localStorage.removeItem(probeKey);
+    storage = localStorage;
+    const savedState = storage.getItem(storageKey);
+    if (savedState != null) {
+      try {
+        state = parseState(savedState);
+      } catch {
+        // Invalid saved state does not disable future writes.
+      }
+    }
+  } catch {
+    storage = null;
+  }
+  const initialGlobals = {
+    widgetState: state,
+    statePersistence: storage == null ? "none" : "local",
+  };
+
+  const channel = new MessageChannel();
+  channel.port1.addEventListener("message", (event) => {
+    const data = event.data;
+    if (typeof data !== "object" || data == null) {
+      return;
+    }
+    if (data.type === "widget-state-write") {
+      if (!Number.isSafeInteger(data.id) || data.id <= 0) {
+        return;
+      }
+      let ok = false;
+      try {
+        if (storage != null) {
+          const state = parseState(data.state);
+          storage.setItem(storageKey, JSON.stringify(state));
+          ok = true;
+        }
+      } catch {
+        // Storage denial, quota limits, and invalid state return a failed receipt.
+      }
+      channel.port1.postMessage({
+        type: "widget-state-result",
+        id: data.id,
+        ok,
+      });
+      return;
+    }
+    if (data.type === "height") {
+      const height = data.height;
+      if (
+        typeof height === "number" &&
+        Number.isFinite(height) &&
+        height >= 0 &&
+        height <= 10_000
+      ) {
+        frame.style.height = Math.ceil(height) + "px";
+      }
+      return;
+    }
+    if (data.type === "scroll-to") {
+      const top = data.top;
+      if (
+        typeof top === "number" &&
+        Number.isFinite(top) &&
+        top >= 0 &&
+        globalThis.navigator.userActivation?.isActive === true
+      ) {
+        globalThis.scrollTo({
+          top: Math.ceil(
+            globalThis.scrollY + frame.getBoundingClientRect().top + top,
+          ),
+        });
+      }
+      return;
+    }
+    if (data.type === "open-external") {
+      const rawHref = data.href;
+      if (typeof rawHref !== "string") {
+        return;
+      }
+      let href;
+      try {
+        const url = new URL(rawHref, document.baseURI);
+        if (url.protocol !== "https:") {
+          return;
+        }
+        href = url.href;
+      } catch {
+        return;
+      }
+      if (globalThis.navigator.userActivation?.isActive === true) {
+        const anchor = document.createElement("a");
+        anchor.href = href;
+        anchor.rel = "noopener noreferrer";
+        anchor.target = "_blank";
+        document.body.appendChild(anchor);
+        anchor.click();
+        anchor.remove();
+      }
+      return;
+    }
+    if (data.type === "follow-up") {
+      const prompt = data.prompt;
+      if (
+        typeof prompt !== "string" ||
+        globalThis.navigator.userActivation?.isActive !== true
+      ) {
+        return;
+      }
+      const title = data.title;
+      globalThis.prompt(typeof title === "string" ? title : prompt, prompt);
+    }
+  });
+  channel.port1.start();
+  const srcdoc = frame.dataset.srcdoc;
+  if (srcdoc == null) {
+    return;
+  }
+  globalThis.addEventListener("resize", () => {
+    const height = Number.parseFloat(frame.style.height);
+    if (!Number.isFinite(height) || height <= viewportHeight) {
+      frame.style.removeProperty("height");
+    }
+    viewportHeight = globalThis.innerHeight;
+    channel.port1.postMessage({ type: "measure" });
+  });
+  frame.addEventListener(
+    "load",
+    () => {
+      frame.contentWindow?.postMessage(
+        { type: "codex-visualization-initialize" },
+        "*",
+        [channel.port2],
+      );
+    },
+    { once: true },
+  );
+  // Match the trusted bootstrap element, not the same text in an authored title.
+  frame.srcdoc = srcdoc.replace(
+    '<script type="application/json" id="codex-visualization-widget-state">__CODEX_VISUALIZATION_WIDGET_STATE__<\/script>',
+    () =>
+      '<script type="application/json" id="codex-visualization-widget-state">' +
+      JSON.stringify(initialGlobals).replaceAll("<", "\\u003c") +
+      "<\/script>",
+  );
+  delete frame.dataset.srcdoc;
+})();
+</script>
+</body>
+</html>
