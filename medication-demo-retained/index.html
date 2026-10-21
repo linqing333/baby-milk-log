@@ -1635,6 +1635,13 @@ html&gt;body{padding:0}&lt;/style&gt;
 #med-motion .record-icon-placeholder{display:block;width:40px;height:40px}
 #med-motion .record-label{display:block;white-space:nowrap;line-height:20px}
 #med-motion .suggestions button{color:#323232;-webkit-text-fill-color:#323232;font-weight:400}
+#med-motion .picker{overflow:hidden;padding-top:8px}
+#med-motion .suggestions{flex-wrap:nowrap;min-width:0;min-height:32px;max-width:calc(100% - 22px);margin:0 11px;padding:0 0 8px;gap:8px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;touch-action:pan-x;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+#med-motion .suggestions::-webkit-scrollbar{display:none}
+#med-motion .suggestions button{flex:0 0 auto;min-height:24px;height:24px;padding:3px 8px;border:0;border-radius:8px;background:#f1f1f3;font-size:13px;font-weight:400;line-height:18px;white-space:nowrap;color:#323232;-webkit-text-fill-color:#323232;user-select:none}
+#med-motion .suggestions:empty{min-height:0;padding-bottom:0}
+#med-motion .med-token,#med-motion .flying-token{color:#323232;-webkit-text-fill-color:#323232}
+
 
 &lt;/style&gt;
 &lt;script&gt;
@@ -1642,10 +1649,10 @@ html&gt;body{padding:0}&lt;/style&gt;
 const root=document.getElementById(&#x27;med-motion&#x27;),q=s=&gt;root.querySelector(s),device=q(&#x27;.device&#x27;),editor=q(&#x27;#med-editor&#x27;),suggestions=q(&#x27;.suggestions&#x27;),status=q(&#x27;#motion-status&#x27;),play=q(&#x27;#play-motion&#x27;);
 const entry=q(&#x27;.entry&#x27;),launcherSlot=q(&#x27;.launcher-editor-slot&#x27;);
 function dockEntry(){launcherSlot.append(entry)}
-const medicines=[&#x27;布洛芬&#x27;,&#x27;999 感冒灵&#x27;,&#x27;阿莫西林&#x27;,&#x27;对乙酰&#x27;,&#x27;罗红霉素&#x27;];let usedMedicines=new Set(),numeric=false,run=0,playing=false,focusTimer,draftStarted=false;
+const medicines=[&#x27;布洛芬&#x27;,&#x27;999 感冒灵&#x27;,&#x27;阿莫西林&#x27;,&#x27;对乙酰&#x27;,&#x27;罗红霉素&#x27;,&#x27;氯雷他定&#x27;,&#x27;益生菌&#x27;,&#x27;莫匹罗星软膏&#x27;,&#x27;维生素 AD&#x27;,&#x27;红霉素软膏&#x27;,&#x27;奥美拉唑&#x27;];let suppressTagClick=false;let usedMedicines=new Set(),numeric=false,run=0,playing=false,focusTimer,draftStarted=false;
 const reduced=matchMedia(&#x27;(prefers-reduced-motion: reduce)&#x27;).matches;
 function size(){const scale=q(&#x27;.device-wrap&#x27;).clientWidth/375;device.style.transform=`scale(${scale})`;q(&#x27;.device-wrap&#x27;).style.height=816*scale+&#x27;px&#x27;}new ResizeObserver(size).observe(q(&#x27;.device-wrap&#x27;));size();
-function renderTags(){const before=new Map([...suggestions.children].map(e=&gt;[e.textContent,e.getBoundingClientRect().left]));suggestions.replaceChildren();medicines.forEach(name=&gt;{const b=document.createElement(&#x27;button&#x27;);b.type=&#x27;button&#x27;;b.textContent=name;b.onpointerdown=e=&gt;e.preventDefault();b.onclick=()=&gt;{if(!playing)select(name)};suggestions.append(b);if(before.has(name)&amp;&amp;!reduced){const dx=(before.get(name)-b.getBoundingClientRect().left)/(q(&#x27;.device-wrap&#x27;).clientWidth/375);b.animate([{transform:`translateX(${dx}px)`},{transform:&#x27;translateX(0)&#x27;}],{duration:200,easing:&#x27;cubic-bezier(.2,.8,.2,1)&#x27;})}})}
+function renderTags(){const before=new Map([...suggestions.children].map(e=&gt;[e.textContent,e.getBoundingClientRect().left]));suggestions.replaceChildren();medicines.forEach(name=&gt;{const b=document.createElement(&#x27;button&#x27;);b.type=&#x27;button&#x27;;b.textContent=name;b.onpointerdown=e=&gt;{if(e.pointerType===&#x27;mouse&#x27;)e.preventDefault()};b.onclick=()=&gt;{if(!playing&amp;&amp;!suppressTagClick)select(name)};suggestions.append(b);if(before.has(name)&amp;&amp;!reduced){const dx=(before.get(name)-b.getBoundingClientRect().left)/(q(&#x27;.device-wrap&#x27;).clientWidth/375);b.animate([{transform:`translateX(${dx}px)`},{transform:&#x27;translateX(0)&#x27;}],{duration:200,easing:&#x27;cubic-bezier(.2,.8,.2,1)&#x27;})}})}
 function endFocus(){editor.focus({preventScroll:true});const s=window.getSelection(),r=document.createRange();r.selectNodeContents(editor);r.collapse(false);s.removeAllRanges();s.addRange(r)}
 function normalizeEmptyEditor(){if(!editor.textContent.replace(/[\u200B\uFEFF]/g,&#x27;&#x27;).trim()){editor.replaceChildren();return true}return false}
 function update(){normalizeEmptyEditor();q(&#x27;#med-send&#x27;).hidden=!editor.textContent.replace(/^用药[：:]\s*/,&#x27;&#x27;).trim()}
@@ -1683,6 +1690,30 @@ editor.addEventListener(&#x27;keydown&#x27;,event=&gt;{
 });
 
 q(&#x27;.launcher-input&#x27;).addEventListener(&#x27;click&#x27;,event=&gt;{if(!playing&amp;&amp;!event.target.closest(&#x27;#med-send&#x27;)&amp;&amp;!device.classList.contains(&#x27;editing&#x27;))open()});
+let tagDrag=null;
+suggestions.addEventListener(&#x27;pointerdown&#x27;,event=&gt;{
+ if(event.pointerType!==&#x27;mouse&#x27;||event.button!==0)return;
+ tagDrag={id:event.pointerId,x:event.clientX,left:suggestions.scrollLeft,moved:false};
+});
+suggestions.addEventListener(&#x27;pointermove&#x27;,event=&gt;{
+ if(!tagDrag||event.pointerId!==tagDrag.id)return;
+ const offset=event.clientX-tagDrag.x;
+ if(!tagDrag.moved&amp;&amp;Math.abs(offset)&lt;5)return;
+ if(!tagDrag.moved){tagDrag.moved=true;suppressTagClick=true;suggestions.setPointerCapture(event.pointerId)}
+ suggestions.scrollLeft=tagDrag.left-offset;
+ event.preventDefault();
+});
+function endTagDrag(event){
+ if(!tagDrag||event.pointerId!==tagDrag.id)return;
+ const moved=tagDrag.moved;
+ if(suggestions.hasPointerCapture(event.pointerId))suggestions.releasePointerCapture(event.pointerId);
+ tagDrag=null;
+ if(moved)setTimeout(()=&gt;{suppressTagClick=false},0);
+}
+suggestions.addEventListener(&#x27;pointerup&#x27;,endTagDrag);
+suggestions.addEventListener(&#x27;pointercancel&#x27;,endTagDrag);
+suggestions.addEventListener(&#x27;click&#x27;,event=&gt;{if(suppressTagClick){event.preventDefault();event.stopImmediatePropagation()}},true);
+
 dockEntry();renderTags();keys();
 })();
 &lt;/script&gt;
