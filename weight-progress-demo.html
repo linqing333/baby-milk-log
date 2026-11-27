@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>体重目标进度 · 动效 Demo</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100svh;display:grid;place-items:center;padding:16px;background:#f2f5f4;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;color:#303232}main{width:min(100%,756px)}svg{display:block;width:100%;height:auto;background:white;border-radius:22px;font-variant-numeric:tabular-nums}footer{display:flex;justify-content:center;padding-top:16px}button{font:inherit;border:1px solid #d8e5df;background:white;color:#17664e;border-radius:24px;padding:10px 20px;cursor:pointer}
+footer label{font-size:14px;font-weight:600}footer select{font:inherit;color:inherit;width:min(100%,420px);padding:10px 12px;border:1px solid #d8e5df;border-radius:12px;background:white}
+</style>
+<main>
+<svg id="gauge" viewBox="0 0 756 718" role="img" aria-label="体重目标进度。起始 44.7 公斤，当前 44.8 公斤，目标 55.0 公斤，已完成 1%。">
+<defs>
+<linearGradient id="band" x2="0" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#dcfff5"/><stop offset="1" stop-color="#fff"/></linearGradient>
+<linearGradient id="fade" x2="0" y2="1"><stop offset=".8" stop-color="white"/><stop offset="1" stop-color="black"/></linearGradient>
+<mask id="scaleFade"><rect x="183" y="242" width="390" height="169" fill="url(#fade)"/></mask>
+<clipPath id="scaleCrop"><rect x="183" y="242" width="390" height="169"/></clipPath>
+</defs>
+<circle cx="44" cy="44" r="16" fill="#13ce99"/>
+<circle cx="44" cy="44" r="7" fill="none" stroke="#fff" stroke-width="2.5"/>
+<path d="M44 44l13-13m-6 0v6h6" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+<text x="80" y="56" font-size="34" font-weight="650">目标进度</text>
+<text x="232" y="54" fill="#999" font-size="25">第<tspan fill="#303232">28</tspan>天·共126天</text>
+<rect x="572.5" y="16.5" width="159" height="55" rx="27.5" fill="none" stroke="#ff4585"/>
+<text x="652" y="54" text-anchor="middle" font-size="26" fill="#ff4585">调整目标</text>
+<path d="M110 434 A268 268 0 0 1 646 434 H604 A226 226 0 0 0 152 434Z" fill="url(#band)"/>
+<path d="M110 434 A268 268 0 0 1 646 434" fill="none" stroke="#bcf6e9" stroke-width="6" stroke-linecap="round"/>
+<path id="progress" fill="none" stroke="#00dba7" stroke-width="13" stroke-linecap="round"/>
+<circle id="handle" r="17" fill="#fff" stroke="#00dba7" stroke-width="10"/>
+<g clip-path="url(#scaleCrop)" mask="url(#scaleFade)">
+<circle cx="378" cy="436" r="188" fill="none" stroke="#dce8e4" stroke-width="2"/>
+<g id="ticks"></g>
+</g>
+<path d="M370 214h18q3 0 1 3l-9 11q-1 2-3 0l-9-11q-1-3 2-3" fill="#24bb8b"/>
+<path d="M379 234v38" stroke="#24bb8b" stroke-width="2"/>
+<text x="378" y="392" text-anchor="middle" font-size="64" font-weight="650"><tspan id="weight">44.8</tspan><tspan font-size="27" font-weight="550">kg</tspan></text>
+<text x="378" y="437" text-anchor="middle" fill="#999" font-size="26">当前体重</text>
+<g fill="#666" font-size="22">
+<text x="107" y="468">44.7<tspan x="107" dy="30">起始</tspan></text>
+<text x="650" y="468" text-anchor="end">55.0<tspan x="650" dy="30">目标</tspan></text>
+</g>
+<rect x="24" y="546" width="708" height="148" rx="16" fill="#f8f8f8"/>
+<g fill="#999" font-size="26"><text x="80" y="598">已增重 ↑</text><text x="316" y="598">还差</text><text x="571" y="598">已完成</text></g>
+<g font-size="46" fill="#303232" font-weight="580">
+<text x="80" y="654"><tspan id="gained">0.1</tspan><tspan dx="4" font-size="25">公斤</tspan></text>
+<text x="316" y="654"><tspan id="remaining">10.2</tspan><tspan dx="4" font-size="25">公斤</tspan></text>
+<text x="571" y="654" fill="#ff4585"><tspan id="percent">1</tspan><tspan dx="5" font-size="25">%</tspan></text>
+</g>
+</svg>
+<footer style="display:grid;justify-items:center;gap:8px">
+  <label for="mode">动效类型</label>
+  <select id="mode"></select>
+  <button id="replay" type="button">播放动效</button>
+</footer>
+</main>
+<script>
+const startWeight = 44.7;
+const modes = [
+  {target: 44.8, numberStartsAtZero: true, scaleStartsAtZero: true, title: '数字与刻度从 0 起播'},
+  {target: 44.8, numberStartsAtZero: false, scaleStartsAtZero: false, title: '数字与刻度从起始体重起播'},
+  {target: 48.6, numberStartsAtZero: true, scaleStartsAtZero: true, title: '数字与刻度从 0 起播'},
+  {target: 48.6, numberStartsAtZero: false, scaleStartsAtZero: false, title: '数字与刻度从起始体重起播'}
+];
+let activeMode = 0;
+const goalWeight = 55;
+const duration = 1250;
+const degreesPerKg = 26;
+const svgNamespace = 'http://www.w3.org/2000/svg';
+const byId = id => document.getElementById(id);
+const ticks = byId('ticks');
+
+function svgElement(tag, attributes) {
+  const element = document.createElementNS(svgNamespace, tag);
+  for (const [name, value] of Object.entries(attributes)) element.setAttribute(name, value);
+  return element;
+}
+
+const scaleMarks = [];
+for (let halfKg = 0; halfKg <= 104; halfKg++) {
+  const value = halfKg / 2;
+  const major = Number.isInteger(value);
+  const group = svgElement('g', {});
+  let label;
+  group.append(svgElement('line', {
+    x1: 378, x2: 378, y1: 248, y2: major ? 270 : 260,
+    stroke: '#dce8e4', 'stroke-width': 2
+  }));
+  if (major) {
+    label = svgElement('text', {x: 378, y: 295, 'text-anchor': 'middle', fill: '#666', 'font-size': 23});
+    label.textContent = value;
+    group.append(label);
+  }
+  ticks.append(group);
+  scaleMarks.push({value, group, label});
+}
+
+function render(fraction) {
+  const {target, numberStartsAtZero, scaleStartsAtZero} = modes[activeMode];
+  const numberStart = numberStartsAtZero ? 0 : startWeight;
+  const scaleStart = scaleStartsAtZero ? 0 : startWeight;
+  const weight = scaleStart + (target - scaleStart) * fraction;
+  const displayedWeight = numberStart + (target - numberStart) * fraction;
+  const progress = (target - startWeight) / (goalWeight - startWeight) * fraction;
+  const angle = Math.PI * progress;
+  const x = 378 - 268 * Math.cos(angle);
+  const y = 434 - 268 * Math.sin(angle);
+  byId('progress').setAttribute('d', progress > 0 ? `M110 434 A268 268 0 0 1 ${x} ${y}` : '');
+  byId('handle').setAttribute('cx', x);
+  byId('handle').setAttribute('cy', y);
+  for (const {value, group, label} of scaleMarks) {
+    const offset = value - weight;
+    const distance = Math.abs(offset);
+    group.style.display = distance <= 3.4 ? '' : 'none';
+    if (distance > 3.4) continue;
+    group.setAttribute('transform', `rotate(${offset * degreesPerKg} 378 436)`);
+    if (label) {
+      // A four-kilogram window contains at most four visible integer labels.
+      const fade = Math.max(0, Math.min(1, (2 - distance) / 0.5));
+      label.style.opacity = fade * fade * (3 - 2 * fade);
+    }
+  }
+  byId('weight').textContent = displayedWeight.toFixed(1);
+}
+
+let frame;
+function play() {
+  cancelAnimationFrame(frame);
+  render(0);
+  let started;
+  function animate(now) {
+    started ??= now;
+    const time = Math.min((now - started) / duration, 1);
+    render(1 - (1 - time) ** 3);
+    if (time < 1) frame = requestAnimationFrame(animate);
+  }
+  frame = requestAnimationFrame(animate);
+}
+
+function selectMode(index) {
+  activeMode = index;
+  const {target} = modes[index];
+  const gained = target - startWeight;
+  const percent = Math.round(gained / (goalWeight - startWeight) * 100);
+  byId('gained').textContent = gained.toFixed(1);
+  byId('remaining').textContent = (goalWeight - target).toFixed(1);
+  byId('percent').textContent = percent;
+  byId('gauge').setAttribute('aria-label', `起始 ${startWeight} 公斤，当前 ${target} 公斤，目标 ${goalWeight} 公斤，已完成 ${percent}%`);
+}
+
+const picker = byId('mode');
+for (const target of new Set(modes.map(mode => mode.target))) {
+  const group = document.createElement('optgroup');
+  group.label = '当前体重 ' + target + ' kg';
+  modes.forEach((mode, index) => {
+    if (mode.target !== target) return;
+    const option = document.createElement('option');
+    option.value = String(index);
+    option.textContent = mode.title;
+    group.append(option);
+  });
+  picker.append(group);
+}
+picker.value = '0';
+byId('replay').addEventListener('click', () => {
+  selectMode(Number(picker.value));
+  play();
+});
+selectMode(0);
+if (matchMedia('(prefers-reduced-motion: reduce)').matches) render(1);
+else play();
+</script>
+</html>
